@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Browse our complete collection of quality products at KhmerMart24. Find electronics, fashion, home goods and more."
+        />
+        <title>Products - KhmerMart24</title>
+        <link rel="stylesheet" href="../public/output.css" />
+        <link rel="icon" type="image/x-icon" href="../public/favicon.ico" />
+    </head>
+    <body class="min-h-full bg-gray-50 text-gray-900">
+        <!-- Header with Navigation -->
+        <header class="border-b bg-white shadow-sm">
+            <nav
+                class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between"
+                aria-label="Main navigation"
+            >
+                <!-- Logo -->
+                <a
+                    href="index.html"
+                    class="text-xl font-bold text-indigo-600 hover:text-indigo-700"
+                    aria-label="KhmerMart24 Home"
+                >
+                    KhmerMart24
+                </a>
+
+                <!-- Navigation Links -->
+                <ul class="flex gap-6" role="menubar">
+                    <li role="none">
+                        <a
+                            href="index.html"
+                            class="hover:text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
+                            role="menuitem"
+                        >
+                            Home
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a
+                            href="products.html"
+                            class="text-indigo-600 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
+                            role="menuitem"
+                            aria-current="page"
+                        >
+                            Products
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a
+                            href="#"
+                            class="hover:text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
+                            role="menuitem"
+                        >
+                            Cart
+                            <span
+                                class="ml-1 rounded-full bg-indigo-100 px-2 py-1 text-xs text-indigo-800"
+                                >0</span
+                            >
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="mx-auto max-w-7xl px-4 py-8">
+            <!-- Page Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold mb-4">All Products</h1>
+                <p class="text-gray-600">
+                    Discover our complete collection of quality products
+                </p>
+            </div>
+
+            <!-- Filters and Search -->
+            <div class="bg-white rounded-lg p-6 mb-8 shadow-sm">
+                <div
+                    class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between"
+                >
+                    <!-- Search -->
+                    <div class="flex-1 max-w-md">
+                        <label for="search" class="sr-only"
+                            >Search products</label
+                        >
+                        <div class="relative">
+                            <input
+                                type="search"
+                                id="search"
+                                placeholder="Search products..."
+                                class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            />
+                            <svg
+                                class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="flex gap-4">
+                        <select
+                            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        >
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="sports">Sports</option>
+                        </select>
+
+                        <!-- Sort -->
+                        <select
+                            class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        >
+                            <option value="name">Sort by Name</option>
+                            <option value="price-low">
+                                Price: Low to High
+                            </option>
+                            <option value="price-high">
+                                Price: High to Low
+                            </option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <section aria-labelledby="products-heading">
+                <h2 id="products-heading" class="sr-only">Products</h2>
+                <div class="product-grid">
+                    <!-- Product Card 1 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden relative"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=Wireless+Headphones"
+                                alt="Wireless Headphones"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <span
+                                class="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded"
+                                >Sale</span
+                            >
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">
+                            Wireless Headphones
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Premium quality wireless headphones with noise
+                            cancellation technology.
+                        </p>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="text-indigo-700 font-bold text-xl"
+                                >$99.99</span
+                            >
+                            <span class="text-gray-400 line-through text-sm"
+                                >$129.99</span
+                            >
+                        </div>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+
+                    <!-- Product Card 2 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=Smart+Watch"
+                                alt="Smart Watch"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">Smart Watch</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Track your fitness and stay connected with this
+                            advanced smart watch.
+                        </p>
+                        <p class="text-indigo-700 font-bold text-xl mb-4">
+                            $199.99
+                        </p>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+
+                    <!-- Product Card 3 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=Laptop+Stand"
+                                alt="Laptop Stand"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">
+                            Ergonomic Laptop Stand
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Adjustable laptop stand for better posture and
+                            increased productivity.
+                        </p>
+                        <p class="text-indigo-700 font-bold text-xl mb-4">
+                            $49.99
+                        </p>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+
+                    <!-- Product Card 4 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden relative"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=Wireless+Charger"
+                                alt="Wireless Charger"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <span
+                                class="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded"
+                                >New</span
+                            >
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">
+                            Fast Wireless Charger
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            15W fast wireless charging pad compatible with all
+                            Qi-enabled devices.
+                        </p>
+                        <p class="text-indigo-700 font-bold text-xl mb-4">
+                            $29.99
+                        </p>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+
+                    <!-- Product Card 5 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=Bluetooth+Speaker"
+                                alt="Bluetooth Speaker"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">
+                            Portable Bluetooth Speaker
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Compact speaker with rich sound quality and 20-hour
+                            battery life.
+                        </p>
+                        <p class="text-indigo-700 font-bold text-xl mb-4">
+                            $79.99
+                        </p>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+
+                    <!-- Product Card 6 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=Phone+Case"
+                                alt="Phone Case"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">
+                            Protective Phone Case
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Military-grade protection with crystal clear design
+                            and wireless charging support.
+                        </p>
+                        <p class="text-indigo-700 font-bold text-xl mb-4">
+                            $24.99
+                        </p>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+
+                    <!-- Product Card 7 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=USB+Hub"
+                                alt="USB Hub"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">
+                            7-in-1 USB-C Hub
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Expand your connectivity with HDMI, USB 3.0, and SD
+                            card slots.
+                        </p>
+                        <p class="text-indigo-700 font-bold text-xl mb-4">
+                            $59.99
+                        </p>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+
+                    <!-- Product Card 8 -->
+                    <article class="card group">
+                        <div
+                            class="aspect-square rounded-lg bg-gray-200 mb-4 overflow-hidden"
+                        >
+                            <img
+                                src="https://via.placeholder.com/300x300/e5e7eb/6b7280?text=Desk+Lamp"
+                                alt="Desk Lamp"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <h3 class="font-medium text-lg mb-2">LED Desk Lamp</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Adjustable LED desk lamp with touch controls and USB
+                            charging port.
+                        </p>
+                        <p class="text-indigo-700 font-bold text-xl mb-4">
+                            $39.99
+                        </p>
+                        <a
+                            href="pages/product.html"
+                            class="btn-primary w-full text-center inline-block"
+                        >
+                            View Details
+                        </a>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Pagination -->
+            <nav
+                aria-label="Product pagination"
+                class="mt-12 flex justify-center"
+            >
+                <div class="flex items-center gap-2">
+                    <button class="btn-secondary" disabled>Previous</button>
+                    <button
+                        class="px-3 py-2 bg-indigo-600 text-white rounded font-medium"
+                        aria-current="page"
+                    >
+                        1
+                    </button>
+                    <button class="px-3 py-2 hover:bg-gray-100 rounded">
+                        2
+                    </button>
+                    <button class="px-3 py-2 hover:bg-gray-100 rounded">
+                        3
+                    </button>
+                    <span class="px-3 py-2 text-gray-500">...</span>
+                    <button class="px-3 py-2 hover:bg-gray-100 rounded">
+                        10
+                    </button>
+                    <button class="btn-secondary">Next</button>
+                </div>
+            </nav>
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t bg-white mt-16">
+            <div class="mx-auto max-w-7xl px-4 py-8">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <!-- Company Info -->
+                    <div>
+                        <h3 class="font-bold text-lg mb-4">KhmerMart24</h3>
+                        <p class="text-gray-600 text-sm">
+                            Your trusted online marketplace for quality products
+                            at great prices.
+                        </p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4 class="font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >About Us</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Contact</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >FAQ</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Support</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Categories -->
+                    <div>
+                        <h4 class="font-semibold mb-4">Categories</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Electronics</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Fashion</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Home & Garden</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Sports</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Legal -->
+                    <div>
+                        <h4 class="font-semibold mb-4">Legal</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Privacy Policy</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Terms of Service</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Shipping Policy</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    class="text-gray-600 hover:text-indigo-600"
+                                    >Returns</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Copyright -->
+                <div
+                    class="border-t mt-8 pt-6 text-center text-sm text-gray-600"
+                >
+                    <p>&copy; 2025 KhmerMart24. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

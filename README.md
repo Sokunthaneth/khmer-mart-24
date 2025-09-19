@@ -1,8 +1,72 @@
-# KhmerMart24 - E-commerce Backend API
+# KhmerMart24 - E-commerce Backend API & Frontend Storefront
 
-A robust Laravel-based e-commerce backend featuring user authentication, product management, order processing, and admin tools.
+A robust Laravel-based e-commerce backend with HTML5/Tailwind CSS frontend, featuring user authentication, product management, order processing, and admin tools.
 
 [![PHP CI](https://github.com/Sokunthaneth/khmer-mart-24/actions/workflows/php.yml/badge.svg)](https://github.com/Sokunthaneth/khmer-mart-24/actions/workflows/php.yml)
+
+## 🎯 Week 7 - Frontend: HTML/CSS for Store Layout
+
+### Project Overview
+Building a static storefront with HTML5 and Tailwind CSS—responsive product grids and storefront scaffolding for KhmerMart24.
+
+### 📋 Week 7 Objectives
+- ✅ Structure KhmerMart24 pages with semantic HTML5 (header, main, footer)
+- ✅ Build responsive product grid and layout using Tailwind CSS
+- ✅ Establish a reusable design system (colors, spacing, typography)
+- ✅ Ensure mobile-first, accessible markup
+
+### 🎯 Week 7 Outcomes
+- Static homepage and product list page with responsive grid
+- Basic Tailwind configuration and utility classes in use
+- Clean, semantic markup ready for Week 8 JavaScript interactivity
+
+### 📅 Week 7 Schedule
+- **Monday (2.5h)**: Lecture + live demos (HTML structure, Tailwind setup, product grid)
+- **Tuesday (2.5h)**: Self-directed storefront build
+- **Friday (1h)**: Presentation of static layout and UX rationale
+
+### ✅ Week 7 Deliverables Checklist
+- [x] Semantic HTML structure for homepage and product list
+- [x] Tailwind CSS integrated and configured
+- [x] Responsive product grid
+- [x] Accessibility basics (landmarks, alt text, contrast)
+- [x] Mobile-first responsive design
+- [x] Clean design system with reusable components
+
+## 🚀 Quick Start - Frontend Development
+
+### Prerequisites
+- Node.js + npm installed
+- Basic understanding of HTML/CSS
+- Assets (logo/placeholders) ready
+
+### Frontend Setup
+```bash
+# Navigate to project root
+cd khmermart24
+
+# Initialize npm and install Tailwind CSS
+npm init -y
+npm install -D tailwindcss postcss autoprefixer
+
+# Initialize Tailwind configuration
+npx tailwindcss init -p
+
+# Start the build process
+npx tailwindcss -i ./frontend/input.css -o ./public/output.css --watch
+```
+
+### Development Workflow
+```bash
+# Backend (Laravel API)
+docker-compose up -d
+
+# Frontend (Tailwind CSS)
+npx tailwindcss -i ./frontend/input.css -o ./public/output.css --watch
+
+# Open storefront
+open frontend/index.html
+```
 
 ## Features
 
