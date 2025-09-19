@@ -5,11 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
             name="description"
-            content="KhmerMart24 - Quality products for everyone. Shop the best deals on electronics, fashion, home goods and more."
+            content="Shopping cart for KhmerMart24. Review your items and proceed to checkout."
         />
-        <title>KhmerMart24 - Shop the Best Deals</title>
+        <title>Shopping Cart - KhmerMart24</title>
         <link rel="stylesheet" href="../public/output.css" />
-        <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="../public/favicon.ico" />
     </head>
     <body class="min-h-full bg-gray-50 text-gray-900">
@@ -51,8 +50,9 @@
                     <li role="none">
                         <a
                             href="cart.html"
-                            class="hover:text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
+                            class="text-indigo-600 font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded"
                             role="menuitem"
+                            aria-current="page"
                         >
                             Cart
                             <span
@@ -68,154 +68,116 @@
 
         <!-- Main Content -->
         <main class="mx-auto max-w-7xl px-4 py-8">
-            <!-- Hero Section -->
-            <section class="mb-12" aria-labelledby="hero-heading">
-                <div
-                    class="rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 md:p-12 text-center"
-                >
-                    <h1
-                        id="hero-heading"
-                        class="text-3xl md:text-4xl font-bold mb-4"
-                    >
-                        Shop the Best Deals
-                    </h1>
-                    <p
-                        class="text-lg md:text-xl opacity-90 mb-6 max-w-2xl mx-auto"
-                    >
-                        Quality products for everyone. Discover amazing deals on
-                        electronics, fashion, home goods and more.
-                    </p>
-                    <a
-                        href="products.html"
-                        class="inline-block bg-white text-indigo-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
-                    >
-                        Shop Now
-                    </a>
-                </div>
-            </section>
+            <!-- Page Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold mb-4">Shopping Cart</h1>
+                <p class="text-gray-600">
+                    Review your items and proceed to checkout
+                </p>
+            </div>
 
-            <!-- Featured Products Section -->
-            <section aria-labelledby="featured-heading" class="mb-12">
-                <h2
-                    id="featured-heading"
-                    class="text-2xl font-bold mb-8 text-center"
-                >
-                    Featured Products
-                </h2>
+            <!-- Cart Content -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Cart Items -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-sm border">
+                        <div class="p-6">
+                            <h2 class="text-lg font-semibold mb-4">
+                                Cart Items
+                            </h2>
 
-                <!-- Product Grid -->
-                <div class="product-grid" data-loading-container>
-                    <!-- Products will be loaded dynamically via JavaScript -->
-                    <div class="col-span-full flex items-center justify-center py-12">
-                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-                        <span class="ml-2 text-gray-600">Loading featured products...</span>
-                    </div>
-                </div>
-                        <h3 class="font-medium text-lg mb-2">
-                            Wireless Charger
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-3">
-                            Fast wireless charging pad compatible with all Qi
-                            devices.
-                        </p>
-                        <p class="text-indigo-700 font-bold text-xl mb-4">
-                            $29.99
-                        </p>
-                        <a
-                            href="pages/product.html"
-                            class="btn-primary w-full text-center inline-block"
-                        >
-                            View Details
-                        </a>
-                    </article>
-                </div>
-
-                <!-- View All Products Button -->
-                <div class="text-center mt-8">
-                    <a href="products.html" class="btn-secondary">
-                        View All Products
-                    </a>
-                </div>
-            </section>
-
-            <!-- Features Section -->
-            <section
-                aria-labelledby="features-heading"
-                class="bg-white rounded-lg p-8"
-            >
-                <h2 id="features-heading" class="sr-only">Our Features</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="text-center">
-                        <div
-                            class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mx-auto mb-4"
-                        >
-                            <svg
-                                class="w-6 h-6 text-indigo-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                            <!-- Empty Cart State -->
+                            <div
+                                id="empty-cart"
+                                class="text-center py-12 hidden"
                             >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M5 13l4 4L19 7"
-                                ></path>
-                            </svg>
+                                <svg
+                                    class="mx-auto h-12 w-12 text-gray-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6m0 0h15M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"
+                                    ></path>
+                                </svg>
+                                <h3
+                                    class="mt-2 text-lg font-medium text-gray-900"
+                                >
+                                    Your cart is empty
+                                </h3>
+                                <p class="mt-1 text-gray-500">
+                                    Start shopping to add items to your cart.
+                                </p>
+                                <a
+                                    href="products.html"
+                                    class="btn-primary inline-block mt-4"
+                                >
+                                    Continue Shopping
+                                </a>
+                            </div>
+
+                            <!-- Cart Items List -->
+                            <div id="cart-items" class="space-y-4">
+                                <!-- Items will be rendered here by JavaScript -->
+                            </div>
                         </div>
-                        <h3 class="font-semibold mb-2">Quality Products</h3>
-                        <p class="text-gray-600">
-                            Carefully curated products from trusted brands.
-                        </p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mx-auto mb-4"
-                        >
-                            <svg
-                                class="w-6 h-6 text-indigo-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                ></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-semibold mb-2">Fast Delivery</h3>
-                        <p class="text-gray-600">
-                            Quick and reliable shipping to your doorstep.
-                        </p>
-                    </div>
-                    <div class="text-center">
-                        <div
-                            class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mx-auto mb-4"
-                        >
-                            <svg
-                                class="w-6 h-6 text-indigo-600"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                ></path>
-                            </svg>
-                        </div>
-                        <h3 class="font-semibold mb-2">Secure Shopping</h3>
-                        <p class="text-gray-600">
-                            Safe and secure payment processing.
-                        </p>
                     </div>
                 </div>
-            </section>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div
+                        class="bg-white rounded-lg shadow-sm border sticky top-4"
+                    >
+                        <div class="p-6">
+                            <h2 class="text-lg font-semibold mb-4">
+                                Order Summary
+                            </h2>
+
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span>Subtotal:</span>
+                                    <span id="subtotal">$0.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Shipping:</span>
+                                    <span id="shipping">Free</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Tax:</span>
+                                    <span id="tax">$0.00</span>
+                                </div>
+                                <hr />
+                                <div
+                                    class="flex justify-between font-semibold text-lg"
+                                >
+                                    <span>Total:</span>
+                                    <span id="total">$0.00</span>
+                                </div>
+                            </div>
+
+                            <button
+                                id="checkout-btn"
+                                class="btn-primary w-full mt-6"
+                                disabled
+                            >
+                                Proceed to Checkout
+                            </button>
+
+                            <a
+                                href="products.html"
+                                class="btn-secondary w-full mt-3 text-center inline-block"
+                            >
+                                Continue Shopping
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
 
         <!-- Footer -->
@@ -347,6 +309,6 @@
         </footer>
 
         <!-- JavaScript -->
-        <script type="module" src="js/home.js"></script>
+        <script type="module" src="js/cart-page.js"></script>
     </body>
 </html>

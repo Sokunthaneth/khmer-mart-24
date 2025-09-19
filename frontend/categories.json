@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Electronics",
+        "description": "Latest gadgets and electronic devices"
+    },
+    {
+        "id": 2,
+        "name": "Office & Home",
+        "description": "Home and office essentials"
+    },
+    {
+        "id": 3,
+        "name": "Fashion",
+        "description": "Clothing and accessories"
+    },
+    {
+        "id": 4,
+        "name": "Sports & Fitness",
+        "description": "Equipment for active lifestyle"
+    }
+]
