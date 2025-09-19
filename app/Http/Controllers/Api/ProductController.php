@@ -14,9 +14,24 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
+        $query = Product::query();
+
+        // Search by name if provided
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Sort by price if specified
+        if ($request->has('sort_by') && $request->sort_by === 'price') {
+            $direction = $request->sort_direction === 'desc' ? 'desc' : 'asc';
+            $query->orderBy('price', $direction);
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $products = $query->paginate($perPage);
+
         return ProductResource::collection($products);
     }
 
