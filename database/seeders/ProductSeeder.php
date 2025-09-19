@@ -14,45 +14,56 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $products = [
+        // Get all categories
+        $categories = Category::all();
+
+        // Create 4 featured products manually
+        $featuredProducts = [
             [
-                'category' => 'Phones',
                 'name' => 'iPhone 14 Pro',
                 'price' => 999.99,
                 'stock' => 50,
                 'description' => 'Latest iPhone model with advanced features'
             ],
             [
-                'category' => 'Laptops',
                 'name' => 'MacBook Pro M2',
                 'price' => 1499.99,
                 'stock' => 30,
                 'description' => 'Powerful laptop for professionals'
             ],
             [
-                'category' => 'Accessories',
                 'name' => 'USB-C Cable',
                 'price' => 19.99,
                 'stock' => 200,
                 'description' => 'High-quality charging cable'
             ],
-            // Add more products here
+            [
+                'name' => 'Smart Watch Pro',
+                'price' => 299.99,
+                'stock' => 75,
+                'description' => 'Advanced fitness tracking and notifications'
+            ]
         ];
 
-        foreach ($products as $product) {
-            $category = Category::where('name', $product['category'])->first();
+        foreach ($featuredProducts as $product) {
+            $category = $categories->random();
 
-            if ($category) {
-                Product::create([
-                    'category_id' => $category->id,
-                    'name' => $product['name'],
-                    'slug' => Str::slug($product['name']),
-                    'sku' => strtoupper(Str::random(8)),
-                    'price' => $product['price'],
-                    'stock' => $product['stock'],
-                    'description' => $product['description']
-                ]);
-            }
+            Product::create([
+                'category_id' => $category->id,
+                'name' => $product['name'],
+                'slug' => Str::slug($product['name']),
+                'sku' => strtoupper(Str::random(8)),
+                'price' => $product['price'],
+                'stock' => $product['stock'],
+                'description' => $product['description']
+            ]);
+        }
+
+        // Create additional random products to reach 20+ total
+        foreach ($categories as $category) {
+            Product::factory()
+                ->count(4) // This will create 4 products per category
+                ->create(['category_id' => $category->id]);
         }
     }
 }
