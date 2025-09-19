@@ -1,0 +1,86 @@
+services:
+  app:
+    image: khmermart24:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - DB_HOST=mysql
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+      - REDIS_HOST=redis
+    volumes:
+      - ./storage:/var/www/html/storage
+      - ./ssl:/etc/ssl/certs:ro
+    depends_on:
+      - mysql
+      - redis
+    restart: unless-stopped
+    networks:
+      - khmermart24
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/custom.cnf:ro
+    restart: unless-stopped
+    networks:
+      - khmermart24
+    command: --default-authentication-plugin=mysql_native_password
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - khmermart24
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+
+  # Optional: Database backup service
+  backup:
+    image: mysql:8.0
+    volumes:
+      - ./backups:/backups
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      - khmermart24
+    restart: "no"
+    entrypoint: |
+      sh -c '
+      while true; do
+        mysqldump -h mysql -u $$MYSQL_USER -p$$MYSQL_PASSWORD $$MYSQL_DATABASE > /backups/backup_$$(date +%Y%m%d_%H%M%S).sql
+        echo "Backup completed at $$(date)"
+        sleep 86400  # Daily backup
+      done
+      '
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  khmermart24:
+    driver: bridge

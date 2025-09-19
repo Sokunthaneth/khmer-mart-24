@@ -66,6 +66,52 @@ GET /api/admin/orders/statistics              # Order statistics
 
 ## Installation & Setup
 
+### Docker Deployment (Recommended)
+
+#### Quick Start with Docker
+```bash
+# Clone repository
+git clone https://github.com/Sokunthaneth/khmer-mart-24.git
+cd khmer-mart-24
+
+# One-command setup for development
+./docker-setup.sh
+
+# Access application at http://localhost:8000
+```
+
+#### Production Docker Build
+```bash
+# Build production image
+./docker-build.sh v1.0.0
+
+# Run production container
+docker run -d \
+  --name khmermart24-prod \
+  -p 80:80 \
+  --env-file .env.production \
+  khmermart24:v1.0.0
+
+# Health check
+curl http://localhost/health
+```
+
+#### Docker Compose Development
+```bash
+# Start development environment
+docker-compose up -d
+
+# View logs
+docker-compose logs -f app
+
+# Run Laravel commands
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan test
+
+# Stop services
+docker-compose down
+```
+
 ### Local Development
 ```bash
 # Clone repository
@@ -90,7 +136,70 @@ php artisan serve
 
 ### Production Deployment
 
-#### 1. VPS/Server Deployment
+#### 1. Docker Container Deployment (Recommended)
+```bash
+# Build production image
+./docker-build.sh v1.0.0
+
+# Deploy to production server
+docker run -d \
+  --name khmermart24 \
+  --restart unless-stopped \
+  -p 80:80 \
+  -p 443:443 \
+  --env-file .env.production \
+  -v /path/to/ssl:/etc/ssl/certs \
+  khmermart24:v1.0.0
+```
+
+#### 2. Container Registry Deployment
+```bash
+# Push to registry
+REGISTRY=your-registry.com ./docker-build.sh v1.0.0
+
+# Deploy from registry
+docker run -d \
+  --name khmermart24 \
+  --restart unless-stopped \
+  -p 80:80 \
+  --env-file .env.production \
+  your-registry.com/khmermart24:v1.0.0
+```
+
+#### 3. Kubernetes Deployment
+```yaml
+# k8s-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: khmermart24
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: khmermart24
+  template:
+    metadata:
+      labels:
+        app: khmermart24
+    spec:
+      containers:
+      - name: khmermart24
+        image: khmermart24:v1.0.0
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: khmermart24-config
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+```
+
+#### 4. VPS/Server Deployment
 ```bash
 # Clone to server
 git clone https://github.com/Sokunthaneth/khmer-mart-24.git /var/www/khmermart24
@@ -104,11 +213,28 @@ cp .env.example .env
 ./deploy.sh
 ```
 
-#### 2. Platform-as-a-Service (Render/Fly.io/Heroku)
+#### 5. Platform-as-a-Service (Render/Fly.io/Heroku)
 The app is configured for PaaS deployment with:
+- Dockerfile for container-based deployment
 - Automatic build optimization
 - Environment variable configuration
 - Health check endpoints at `/health`
+
+### Docker Services
+
+The Docker setup includes:
+
+#### Development Services
+- **App Container**: Laravel application with PHP 8.2 + Nginx
+- **MySQL 8.0**: Database server with persistent storage
+- **Redis 7**: Caching and session storage
+- **PHPMyAdmin**: Database management interface
+
+#### Service URLs (Development)
+- 🌐 **Application**: http://localhost:8000
+- 🗄️ **PHPMyAdmin**: http://localhost:8080
+- 🔴 **Redis**: localhost:6379
+- 🐬 **MySQL**: localhost:3306
 
 ### Environment Configuration
 
@@ -145,7 +271,17 @@ php artisan test --coverage
 
 ## Deployment Checklist
 
-- [ ] Environment variables configured
+### Docker Deployment
+- [ ] Docker and Docker Compose installed
+- [ ] Environment variables configured in `.env`
+- [ ] SSL certificates mounted (production)
+- [ ] Health check returns 200 OK: `curl http://localhost/health`
+- [ ] Admin endpoints protected (403 for non-admin)
+- [ ] Database migrations applied
+- [ ] Storage permissions set correctly
+- [ ] Container logs clean and error-free
+
+### Traditional Deployment
 - [ ] Database migrations run
 - [ ] SSL certificate installed
 - [ ] Health check returns 200 OK
@@ -188,9 +324,11 @@ curl -s https://your-domain.com/health
 
 ### Performance Optimizations
 1. **Caching**: Query results and configurations
-2. **Optimization**: Production asset compilation
-3. **Database**: Proper indexing and relationships
-4. **Sessions**: Database-backed session storage
+2. **Docker Multi-stage**: Optimized production images
+3. **Nginx**: Static asset caching and gzip compression
+4. **OPcache**: PHP bytecode optimization
+5. **Database**: Proper indexing and relationships
+6. **Sessions**: Redis-backed session storage
 
 ## Contributing
 
