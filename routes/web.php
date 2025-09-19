@@ -16,6 +16,16 @@ Route::get('/about', [PageController::class, 'about']);
 Route::get('/register', [PageController::class, 'showRegister']);
 Route::post('/register', [PageController::class, 'register']);
 
+// Health check endpoint
+Route::get('/health', function () {
+    return response()->json([
+        'status' => 'ok',
+        'timestamp' => now()->toISOString(),
+        'environment' => app()->environment(),
+        'version' => '1.0.0'
+    ]);
+});
+
 // Protected routes
 Route::middleware(['auth'])->group(function () {
     // Cart & Checkout
