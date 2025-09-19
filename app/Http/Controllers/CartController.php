@@ -12,9 +12,15 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         $products = Product::whereIn('id', array_keys($cart))->get();
 
+        $total = 0;
+        foreach ($products as $product) {
+            $total += $product->price * $cart[$product->id];
+        }
+
         return view('cart.show', [
             'cart' => $cart,
-            'products' => $products
+            'products' => $products,
+            'total' => $total
         ]);
     }
 
@@ -40,5 +46,23 @@ class CartController extends Controller
     {
         session()->forget('cart');
         return back()->with('success', 'Cart cleared');
+    }
+
+    public function updateQuantity(Request $request, Product $product)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1|max:99'
+        ]);
+
+        $cart = session()->get('cart', []);
+
+        if ($request->quantity > 0) {
+            $cart[$product->id] = $request->quantity;
+        } else {
+            unset($cart[$product->id]);
+        }
+
+        session(['cart' => $cart]);
+        return back()->with('success', 'Cart updated successfully');
     }
 }
