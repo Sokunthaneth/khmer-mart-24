@@ -21,15 +21,27 @@ class AdminProductController extends Controller
         $oldStock = $product->stock;
         $product->update(['stock' => $data['stock']]);
 
-        // Log the inventory change
-        Log::info('Admin inventory update', [
+        // Enhanced audit logging for Friday demo
+        $auditData = [
+            'action' => 'inventory_update',
             'product_id' => $product->id,
             'product_name' => $product->name,
+            'product_sku' => $product->sku,
             'old_stock' => $oldStock,
             'new_stock' => $data['stock'],
+            'stock_difference' => $data['stock'] - $oldStock,
             'admin_user_id' => auth()->id(),
             'admin_user_name' => auth()->user()->name,
-        ]);
+            'admin_user_email' => auth()->user()->email,
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'timestamp' => now()->toISOString(),
+        ];
+
+        Log::info('Admin inventory update', $auditData);
+
+        // Also log to a dedicated audit channel for security monitoring
+        Log::channel('audit')->info('INVENTORY_UPDATE', $auditData);
 
         // Clear product caches
         Cache::forget('products_paginated_' . request('page', 1));

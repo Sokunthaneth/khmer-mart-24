@@ -33,13 +33,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/orders/{order}', [OrderController::class, 'show']);
     Route::patch('/orders/{order}/cancel', [OrderController::class, 'cancel']);
 
-    // Admin only routes
-    Route::middleware(['admin'])->prefix('admin')->group(function () {
-        // Product management
+    // Admin only routes with rate limiting
+    Route::middleware(['admin', 'throttle:60,1'])->prefix('admin')->group(function () {
+        // Product management (more restrictive rate limiting for inventory updates)
         Route::get('/products', [AdminProductController::class, 'index']);
         Route::get('/products/{product}', [AdminProductController::class, 'show']);
-        Route::patch('/products/{product}/inventory', [AdminProductController::class, 'updateInventory']);
-        Route::patch('/products/bulk-inventory', [AdminProductController::class, 'bulkUpdateInventory']);
+        Route::middleware(['throttle:30,1'])->group(function () {
+            Route::patch('/products/{product}/inventory', [AdminProductController::class, 'updateInventory']);
+            Route::patch('/products/bulk-inventory', [AdminProductController::class, 'bulkUpdateInventory']);
+        });
 
         // Order management
         Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus']);

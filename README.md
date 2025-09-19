@@ -4,16 +4,6 @@ A robust Laravel-based e-commerce backend featuring user authentication, product
 
 [![PHP CI](https://github.com/Sokunthaneth/khmer-mart-24/actions/workflows/php.yml/badge.svg)](https://github.com/Sokunthaneth/khmer-mart-24/actions/workflows/php.yml)
 
-## Week 6 - Deployment & Admin Tools
-
-This project has been enhanced for production deployment with:
-- ✅ Production-ready configuration
-- ✅ Admin inventory management system
-- ✅ Comprehensive test suite
-- ✅ CI/CD pipeline with GitHub Actions
-- ✅ Health check endpoints
-- ✅ Security middleware and logging
-
 ## Features
 
 ### Core E-commerce
