@@ -27,10 +27,32 @@ export const clearToken = () => {
 };
 
 /**
- * Check if user is authenticated
+ * Check if token is expired
+ */
+export const isTokenExpired = (token = getToken()) => {
+    if (!token) return true;
+
+    try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const currentTime = Date.now() / 1000;
+
+        // Token is expired if current time is past expiry time
+        return payload.exp && payload.exp < currentTime;
+    } catch (error) {
+        console.warn("Failed to decode token:", error);
+        return true; // Treat invalid tokens as expired
+    }
+};
+
+/**
+ * Check if user is authenticated and token is valid
  */
 export const isAuthed = () => {
-    return Boolean(getToken());
+    const token = getToken();
+    if (!token) return false;
+
+    // Check if token is expired
+    return !isTokenExpired(token);
 };
 
 /**
@@ -84,6 +106,77 @@ export const login = async (email, password) => {
     }
 
     return data;
+};
+
+/**
+ * Refresh auth token (Stretch Goal)
+ */
+export const refreshToken = async () => {
+    const currentToken = getToken();
+    if (!currentToken) {
+        throw new Error("No token to refresh");
+    }
+
+    try {
+        const response = await fetch(
+            `${import.meta.env.VITE_API_URL || ""}/api/refresh`,
+            {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${currentToken}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (data.token) {
+            setToken(data.token);
+            return data.token;
+        }
+
+        throw new Error("No token in refresh response");
+    } catch (error) {
+        console.error("Token refresh failed:", error);
+        // If refresh fails, logout the user
+        logout();
+        throw error;
+    }
+};
+
+/**
+ * Auto-refresh token if it's close to expiry (Stretch Goal)
+ */
+export const autoRefreshToken = async () => {
+    const token = getToken();
+    if (!token) return;
+
+    try {
+        const payload = JSON.parse(atob(token.split(".")[1]));
+        const currentTime = Date.now() / 1000;
+        const timeUntilExpiry = payload.exp - currentTime;
+
+        // Refresh if token expires in less than 5 minutes
+        if (timeUntilExpiry < 300 && timeUntilExpiry > 0) {
+            console.log("Auto-refreshing token...");
+            await refreshToken();
+        }
+    } catch (error) {
+        console.warn("Auto-refresh check failed:", error);
+    }
+};
+
+/**
+ * Enhanced authHeaders with auto-refresh (Stretch Goal)
+ */
+export const authHeadersWithRefresh = async () => {
+    await autoRefreshToken();
+    return authHeaders();
 };
 
 /**
