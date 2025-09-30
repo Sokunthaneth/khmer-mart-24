@@ -38,14 +38,18 @@ export function addToCart(product, qty = 1) {
     );
 
     if (existingIndex >= 0) {
-        cart.items[existingIndex].qty += qty;
+        cart.items[existingIndex].quantity =
+            (cart.items[existingIndex].quantity ||
+                cart.items[existingIndex].qty ||
+                0) + qty;
     } else {
         cart.items.push({
             id: product.id,
             name: product.name,
             price: product.price,
             image: product.image_url || product.image,
-            qty: qty,
+            description: product.description,
+            quantity: qty,
         });
     }
 
@@ -74,7 +78,7 @@ export function updateCartQuantity(productId, qty) {
         if (qty <= 0) {
             cart.items.splice(itemIndex, 1);
         } else {
-            cart.items[itemIndex].qty = qty;
+            cart.items[itemIndex].quantity = qty;
         }
         setCart(cart);
     }
@@ -92,18 +96,28 @@ export function clearCart() {
 }
 
 /**
+ * Update item quantity in cart (alias for consistency)
+ */
+export function updateCartItemQuantity(productId, quantity) {
+    return updateCartQuantity(productId, quantity);
+}
+
+/**
  * Get cart totals
  */
 export function getCartTotals(cart = getCart()) {
     const subtotal = cart.items.reduce(
-        (total, item) => total + item.price * item.qty,
+        (total, item) => total + item.price * (item.quantity || item.qty),
         0
     );
-    const itemCount = cart.items.reduce((count, item) => count + item.qty, 0);
+    const itemCount = cart.items.reduce(
+        (count, item) => count + (item.quantity || item.qty),
+        0
+    );
 
     return {
         subtotal: subtotal,
-        itemCount: itemCount,
+        count: itemCount,
         total: subtotal, // Add tax, shipping, etc. here later
     };
 }

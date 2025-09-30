@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 /**
  * CartBadge component - displays cart icon with item count
  */
-export default function CartBadge({ itemCount = 0, onClick }) {
+export default function CartBadge({ itemCount = 0 }) {
     return (
-        <button
-            onClick={onClick}
+        <Link
+            to="/cart"
             className="relative flex items-center space-x-2 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded p-2"
             aria-label={`Cart with ${itemCount} items`}
         >
@@ -29,6 +31,6 @@ export default function CartBadge({ itemCount = 0, onClick }) {
                     {itemCount > 99 ? "99+" : itemCount}
                 </span>
             )}
-        </button>
+        </Link>
     );
 }
