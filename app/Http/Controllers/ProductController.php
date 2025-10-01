@@ -19,12 +19,7 @@ class ProductController extends Controller
 
         // Apply category filter
         if ($request->has('category_id')) {
-            $query->byCategory($request->category_id);
-        }
-
-        // Apply price range filter
-        if ($request->has(['min_price', 'max_price'])) {
-            $query->byPriceRange($request->min_price, $request->max_price);
+            $query->where('category_id', $request->category_id);
         }
 
         // Get products with category relationship and paginate
@@ -50,10 +45,9 @@ class ProductController extends Controller
         $validated = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255|unique:products',
-            'sku' => 'required|string|max:50|unique:products',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'summary' => 'nullable|string',
+            'cover' => 'nullable|string|url'
         ]);
 
         $product = Product::create($validated);
@@ -88,10 +82,9 @@ class ProductController extends Controller
         $validated = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => ['required', 'string', 'max:255', Rule::unique('products')->ignore($product->id)],
-            'sku' => ['required', 'string', 'max:50', Rule::unique('products')->ignore($product->id)],
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'summary' => 'nullable|string',
+            'cover' => 'nullable|string|url'
         ]);
 
         $product->update($validated);
@@ -105,33 +98,5 @@ class ProductController extends Controller
     {
         $product->delete();
         return response()->json(null, 204);
-    }
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
