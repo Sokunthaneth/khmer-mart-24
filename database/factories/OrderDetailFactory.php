@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\OrderDetail>
  */
-class CategoryFactory extends Factory
+class OrderDetailFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +18,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->words(2, true),
-            'description' => fake()->paragraph(),
+            'user_id' => User::factory(),
+            'total' => fake()->numberBetween(1000, 50000),
         ];
     }
 }

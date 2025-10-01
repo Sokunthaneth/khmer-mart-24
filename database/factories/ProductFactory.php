@@ -19,15 +19,12 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->unique()->words(3, true);
         return [
-            'category_id' => Category::factory(),
-            'name' => $name,
-            'slug' => Str::slug($name),
-            'sku' => strtoupper(fake()->unique()->bothify('??##??####')),
-            'price' => fake()->randomFloat(2, 5, 1000),
-            'stock' => fake()->numberBetween(0, 100),
-            'description' => fake()->paragraph()
+            'name' => fake()->words(3, true),
+            'description' => fake()->paragraph(),
+            'summary' => fake()->sentence(),
+            'cover' => fake()->imageUrl(400, 400, 'products'),
+            'category_id' => fake()->randomElement(['1', '2', '3', '4', '5']),
         ];
     }
 }
