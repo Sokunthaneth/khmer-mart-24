@@ -24,31 +24,60 @@ class PaymentDetail extends Model
     }
 
     // Relationships
-    public function order()
+    public function orderDetail()
     {
-        return $this->belongsTo(OrderDetail::class, 'order_id');
+        return $this->belongsTo(OrderDetail::class);
     }
 
-    // Scopes
-    public function scopeCompleted($query)
+    // CRUD Operations
+    public static function createPaymentDetail(array $data)
     {
-        return $query->where('status', 'completed');
+        return self::create($data);
     }
 
-    public function scopePending($query)
+    public static function getPaymentDetailById($id)
     {
-        return $query->where('status', 'pending');
+        return self::find($id);
     }
 
-    public function scopeFailed($query)
+    public static function getAllPaymentDetails()
     {
-        return $query->where('status', 'failed');
+        return self::all();
     }
 
-    // Helper methods
-    public function isCompleted()
+    public static function getPaymentDetailsByOrder($orderDetailId)
     {
-        return $this->status === 'completed';
+        return self::where('order_detail_id', $orderDetailId)->get();
+    }
+
+    public static function getPaymentDetailsWithOrder()
+    {
+        return self::with('orderDetail')->get();
+    }
+
+    public function updatePaymentDetail(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deletePaymentDetail()
+    {
+        return $this->delete();
+    }
+
+    public static function getPaymentsByStatus($status)
+    {
+        return self::where('status', $status)->get();
+    }
+
+    public static function getPaymentsByProvider($provider)
+    {
+        return self::where('provider', $provider)->get();
+    }
+
+    public function isSuccessful()
+    {
+        return $this->status === 'success';
     }
 
     public function isPending()

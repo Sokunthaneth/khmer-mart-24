@@ -53,6 +53,57 @@ class ProductSku extends Model
 
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class, 'products_sku_id');
+        return $this->hasMany(OrderItem::class);
+    }
+
+    // CRUD Operations
+    public static function createProductSku(array $data)
+    {
+        return self::create($data);
+    }
+
+    public static function getProductSkuById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function getAllProductSkus()
+    {
+        return self::all();
+    }
+
+    public static function getSkusByProduct($productId)
+    {
+        return self::where('product_id', $productId)->get();
+    }
+
+    public static function getSkusWithProduct()
+    {
+        return self::with('product')->get();
+    }
+
+    public static function getSkusWithAttribute()
+    {
+        return self::with('productAttribute')->get();
+    }
+
+    public function updateProductSku(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteProductSku()
+    {
+        return $this->delete();
+    }
+
+    public static function getSkuBySku($sku)
+    {
+        return self::where('sku', $sku)->first();
+    }
+
+    public static function getAvailableSkus()
+    {
+        return self::where('quantity', '>', 0)->get();
     }
 }

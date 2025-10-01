@@ -23,24 +23,49 @@ class ProductAttribute extends Model
     }
 
     // Relationships
-    public function sizeProductSkus()
+    public function productSkus()
     {
-        return $this->hasMany(ProductSku::class, 'size_attribute_id');
+        return $this->hasMany(ProductSku::class);
     }
 
-    public function colorProductSkus()
+    // CRUD Operations
+    public static function createProductAttribute(array $data)
     {
-        return $this->hasMany(ProductSku::class, 'color_attribute_id');
+        return self::create($data);
     }
 
-    // Scopes
-    public function scopeColors($query)
+    public static function getProductAttributeById($id)
     {
-        return $query->where('type', 'color');
+        return self::find($id);
     }
 
-    public function scopeSizes($query)
+    public static function getAllProductAttributes()
     {
-        return $query->where('type', 'size');
+        return self::all();
+    }
+
+    public static function getProductAttributesWithSkus()
+    {
+        return self::with('productSkus')->get();
+    }
+
+    public function updateProductAttribute(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteProductAttribute()
+    {
+        return $this->delete();
+    }
+
+    public static function getAttributesByName($name)
+    {
+        return self::where('attribute_name', $name)->get();
+    }
+
+    public static function getAttributesByValue($value)
+    {
+        return self::where('attribute_value', $value)->get();
     }
 }

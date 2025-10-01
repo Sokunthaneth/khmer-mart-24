@@ -29,4 +29,45 @@ class Category extends Model
     {
         return $this->hasMany(SubCategory::class, 'parent_id');
     }
+
+    // CRUD Operations
+    public static function createCategory(array $data)
+    {
+        return self::create($data);
+    }
+
+    public static function getCategoryById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function getAllCategories()
+    {
+        return self::all();
+    }
+
+    public static function getCategoriesWithSubCategories()
+    {
+        return self::with('subCategories')->get();
+    }
+
+    public static function getCategoriesWithProducts()
+    {
+        return self::with('products')->get();
+    }
+
+    public function updateCategory(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteCategory()
+    {
+        return $this->delete();
+    }
+
+    public static function getCategoryByName($name)
+    {
+        return self::where('name', $name)->first();
+    }
 }

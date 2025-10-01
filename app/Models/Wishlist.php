@@ -34,4 +34,52 @@ class Wishlist extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    // CRUD Operations
+    public static function createWishlist(array $data)
+    {
+        return self::create($data);
+    }
+
+    public static function getWishlistById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function getAllWishlists()
+    {
+        return self::all();
+    }
+
+    public static function getWishlistsByUser($userId)
+    {
+        return self::where('user_id', $userId)->get();
+    }
+
+    public static function getWishlistsWithProduct()
+    {
+        return self::with('product')->get();
+    }
+
+    public function updateWishlist(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteWishlist()
+    {
+        return $this->delete();
+    }
+
+    public static function getUserWishlistWithProducts($userId)
+    {
+        return self::with('product')->where('user_id', $userId)->get();
+    }
+
+    public static function checkIfInWishlist($userId, $productId)
+    {
+        return self::where('user_id', $userId)
+            ->where('product_id', $productId)
+            ->exists();
+    }
 }

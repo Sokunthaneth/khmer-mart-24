@@ -36,14 +36,57 @@ class CartItem extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function productSku()
+    // CRUD Operations
+    public static function createCartItem(array $data)
     {
-        return $this->belongsTo(ProductSku::class, 'products_sku_id');
+        return self::create($data);
     }
 
-    // Helper methods
-    public function getSubtotal()
+    public static function getCartItemById($id)
     {
-        return $this->quantity * $this->productSku->price;
+        return self::find($id);
+    }
+
+    public static function getAllCartItems()
+    {
+        return self::all();
+    }
+
+    public static function getCartItemsByCart($cartId)
+    {
+        return self::where('cart_id', $cartId)->get();
+    }
+
+    public static function getCartItemsWithProduct()
+    {
+        return self::with('product')->get();
+    }
+
+    public function updateCartItem(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteCartItem()
+    {
+        return $this->delete();
+    }
+
+    public static function findExistingItem($cartId, $productId)
+    {
+        return self::where('cart_id', $cartId)
+            ->where('product_id', $productId)
+            ->first();
+    }
+
+    public function incrementQuantity($amount = 1)
+    {
+        return $this->update(['quantity' => $this->quantity + $amount]);
+    }
+
+    public function decrementQuantity($amount = 1)
+    {
+        $newQuantity = max(0, $this->quantity - $amount);
+        return $this->update(['quantity' => $newQuantity]);
     }
 }

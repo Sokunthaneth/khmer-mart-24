@@ -47,10 +47,50 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'birth_of_date' => 'date',
+            'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'deleted_at' => 'datetime',
         ];
+    }
+
+    // CRUD Operations
+    public static function createUser(array $data)
+    {
+        return self::create($data);
+    }
+
+    public static function getUserById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function getUserByEmail($email)
+    {
+        return self::where('email', $email)->first();
+    }
+
+    public static function getAllUsers()
+    {
+        return self::all();
+    }
+
+    public function updateUser(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteUser()
+    {
+        return $this->delete();
+    }
+
+    public static function getUsersWithAddresses()
+    {
+        return self::with('addresses')->get();
+    }
+
+    public static function getUsersWithOrders()
+    {
+        return self::with('orderDetails')->get();
     }
 
     // Relationships

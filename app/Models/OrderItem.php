@@ -38,12 +38,57 @@ class OrderItem extends Model
 
     public function productSku()
     {
-        return $this->belongsTo(ProductSku::class, 'products_sku_id');
+        return $this->belongsTo(ProductSku::class);
     }
 
-    // Helper methods
-    public function getSubtotal()
+    // CRUD Operations
+    public static function createOrderItem(array $data)
     {
-        return $this->quantity * $this->productSku->price;
+        return self::create($data);
+    }
+
+    public static function getOrderItemById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function getAllOrderItems()
+    {
+        return self::all();
+    }
+
+    public static function getOrderItemsByOrder($orderDetailId)
+    {
+        return self::where('order_detail_id', $orderDetailId)->get();
+    }
+
+    public static function getOrderItemsWithProduct()
+    {
+        return self::with('product')->get();
+    }
+
+    public static function getOrderItemsWithSku()
+    {
+        return self::with('productSku')->get();
+    }
+
+    public function updateOrderItem(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteOrderItem()
+    {
+        return $this->delete();
+    }
+
+    public function calculateTotal()
+    {
+        return $this->quantity * $this->price;
+    }
+
+    public static function getItemsByProduct($productId)
+    {
+        return self::where('product_id', $productId)->get();
     }
 }
