@@ -12,36 +12,43 @@ class Product extends Model
     use SoftDeletes, HasFactory;
 
     protected $fillable = [
-        'category_id',
         'name',
-        'slug',
-        'sku',
-        'price',
-        'stock',
-        'description'
+        'description',
+        'summary',
+        'cover',
+        'category_id'
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'deleted_at' => 'datetime',
+        ];
+    }
+
+    // Relationships
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    protected static function boot()
+    public function productSkus()
     {
-        parent::boot();
-
-        static::creating(function ($product) {
-            $product->slug = Str::slug($product->name);
-        });
+        return $this->hasMany(ProductSku::class);
     }
 
-    public function scopeByCategory($query, $categoryId)
+    public function wishlistItems()
     {
-        return $query->where('category_id', $categoryId);
+        return $this->hasMany(Wishlist::class);
     }
 
-    public function scopeByPriceRange($query, $min, $max)
+    public function cartItems()
     {
-        return $query->whereBetween('price', [$min, $max]);
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

@@ -6,11 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Address extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = [
+        'user_id',
+        'title',
+        'address_line_1',
+        'address_line_2',
+        'country',
+        'city',
+        'postal_code',
+        'landmark',
+        'phone_number',
+    ];
 
     protected function casts(): array
     {
@@ -20,13 +30,8 @@ class Category extends Model
     }
 
     // Relationships
-    public function products()
+    public function user()
     {
-        return $this->hasMany(Product::class, 'category_id', 'id');
-    }
-
-    public function subCategories()
-    {
-        return $this->hasMany(SubCategory::class, 'parent_id');
+        return $this->belongsTo(User::class);
     }
 }

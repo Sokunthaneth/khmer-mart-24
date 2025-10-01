@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Wishlist extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description'];
+    protected $table = 'wishlist';
+
+    protected $fillable = [
+        'user_id',
+        'product_id',
+    ];
 
     protected function casts(): array
     {
@@ -20,13 +25,13 @@ class Category extends Model
     }
 
     // Relationships
-    public function products()
+    public function user()
     {
-        return $this->hasMany(Product::class, 'category_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
-    public function subCategories()
+    public function product()
     {
-        return $this->hasMany(SubCategory::class, 'parent_id');
+        return $this->belongsTo(Product::class);
     }
 }
