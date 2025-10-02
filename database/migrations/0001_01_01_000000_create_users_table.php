@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('role');
             $table->date('birth_of_date')->nullable();
             $table->string('phone_number')->nullable();
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

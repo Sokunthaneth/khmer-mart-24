@@ -7,6 +7,7 @@ CREATE TABLE `users` (
   `email` varchar(255) UNIQUE NOT NULL,
   `role` varchar(255,
   `password` varchar(255),
+  `remember_token` varchar(255),
   `birth_of_date` date,
   `phone_number` varchar(255),
   `created_at` timestamp,
