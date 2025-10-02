@@ -5,6 +5,7 @@ CREATE TABLE `users` (
   `last_name` varchar(255),
   `username` varchar(255) UNIQUE NOT NULL,
   `email` varchar(255) UNIQUE NOT NULL,
+  `role` varchar(255,
   `password` varchar(255),
   `birth_of_date` date,
   `phone_number` varchar(255),
