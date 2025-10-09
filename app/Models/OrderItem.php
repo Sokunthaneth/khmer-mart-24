@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
@@ -38,7 +38,7 @@ class OrderItem extends Model
 
     public function productSku()
     {
-        return $this->belongsTo(ProductSku::class);
+        return $this->belongsTo(ProductSku::class, 'products_sku_id');
     }
 
     // CRUD Operations
@@ -84,7 +84,16 @@ class OrderItem extends Model
 
     public function calculateTotal()
     {
-        return $this->quantity * $this->price;
+        if ($this->productSku) {
+            return floatval($this->productSku->price) * $this->quantity;
+        }
+
+        return 0;
+    }
+
+    public function getSubtotalInCents()
+    {
+        return $this->calculateTotal() * 100;
     }
 
     public static function getItemsByProduct($productId)

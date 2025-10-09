@@ -24,7 +24,7 @@ class ProductSku extends Model
     protected function casts(): array
     {
         return [
-            'price' => 'decimal:2',
+            'price' => 'float',
             'quantity' => 'integer',
             'deleted_at' => 'datetime',
         ];

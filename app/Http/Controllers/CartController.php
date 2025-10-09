@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderDetail;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductSku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -24,13 +27,14 @@ class CartController extends Controller
 
             foreach ($skus as $sku) {
                 $quantity = $cart[$sku->id];
+                $subtotal = floatval($sku->price) * $quantity;
                 $cartItems->push([
                     'sku' => $sku,
                     'product' => $sku->product,
                     'quantity' => $quantity,
-                    'subtotal' => $sku->price * $quantity,
+                    'subtotal' => $subtotal,
                 ]);
-                $total += $sku->price * $quantity;
+                $total += $subtotal;
                 $cartCount += $quantity;
             }
         }
@@ -197,7 +201,7 @@ class CartController extends Controller
 
         foreach ($skus as $sku) {
             $quantity = $cart[$sku->id];
-            $subtotal = $sku->price * $quantity;
+            $subtotal = floatval($sku->price) * $quantity;
 
             $cartItems->push([
                 'sku' => $sku,
@@ -234,33 +238,62 @@ class CartController extends Controller
             return redirect()->route('cart.show')->with('error', 'Your cart is empty');
         }
 
-        // Here you would typically:
-        // 1. Create an order record in the database
-        // 2. Process payment
-        // 3. Send confirmation email
-        // For now, we'll just simulate the process
+        try {
+            // Calculate total using SKU-based pricing
+            $skuIds = array_keys($cart);
+            $skus = ProductSku::with('product')->whereIn('id', $skuIds)->get();
+            $total = 0;
 
-        // Calculate total using SKU-based pricing
-        $skuIds = array_keys($cart);
-        $skus = ProductSku::whereIn('id', $skuIds)->get();
-        $total = 0;
+            foreach ($skus as $sku) {
+                $quantity = $cart[$sku->id];
+                // Convert price to cents and calculate total
+                $total += (floatval($sku->price) * $quantity * 100);
+            }
 
-        foreach ($skus as $sku) {
-            $quantity = $cart[$sku->id];
-            $total += $sku->price * $quantity;
+            // Begin database transaction
+            DB::beginTransaction();
+
+            // 1. Create an order record in the database
+            $orderDetail = OrderDetail::createOrderDetail([
+                'user_id' => auth()->id() ?? null, // Handle guest checkout
+                'total' => $total,
+                'payment_id' => null, // Will be updated after payment processing
+            ]);
+
+            // 2. Create order items for each cart item
+            foreach ($skus as $sku) {
+                $quantity = $cart[$sku->id];
+
+                OrderItem::createOrderItem([
+                    'order_id' => $orderDetail->id,
+                    'product_id' => $sku->product->id,
+                    'products_sku_id' => $sku->id,
+                    'quantity' => $quantity,
+                ]);
+            }
+
+            // Commit the transaction
+            DB::commit();
+
+            // Clear the cart after successful order
+            session()->forget('cart');
+
+            // 3. Process payment (placeholder for future implementation)
+            // 4. Send confirmation email (placeholder for future implementation)
+
+            return view('cart.success', [
+                'orderId' => $orderDetail->id,
+                'total' => $total,
+                'customerName' => $request->name,
+            ]);
+
+        } catch (\Exception $e) {
+            // Rollback the transaction on error
+            DB::rollback();
+
+            return redirect()->route('cart.checkout')
+                ->with('error', 'Failed to process order. Please try again.');
         }
-
-        // Clear the cart after successful order
-        session()->forget('cart');
-
-        // Generate a mock order ID
-        $orderId = 'ORD-'.strtoupper(uniqid());
-
-        return view('cart.success', [
-            'orderId' => $orderId,
-            'total' => $total,
-            'customerName' => $request->name,
-        ]);
     }
 
     public function getCartCount()

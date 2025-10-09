@@ -3,15 +3,16 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/order/{id}', [DashboardController::class, 'showOrder'])->middleware(['auth', 'verified'])->name('dashboard.order.show');
+Route::get('/dashboard/my-orders', [DashboardController::class, 'userOrders'])->middleware(['auth', 'verified'])->name('dashboard.user-orders');
 
 // Public product routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');

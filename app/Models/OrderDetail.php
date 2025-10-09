@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
 {
@@ -30,7 +30,12 @@ class OrderDetail extends Model
 
     public function paymentDetails()
     {
-        return $this->hasMany(PaymentDetail::class);
+        return $this->hasMany(PaymentDetail::class, 'order_id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'order_id');
     }
 
     // CRUD Operations
@@ -81,7 +86,30 @@ class OrderDetail extends Model
 
     public function getTotalAmount()
     {
-        return $this->orderItems->sum('total');
+        return $this->orderItems->sum(function ($item) {
+            return $item->calculateTotal();
+        });
+    }
+
+    public function getFormattedTotal()
+    {
+        // Calculate total from order items instead of using stored total
+        return number_format($this->getTotalAmount(), 2);
+    }
+
+    public function getStoredFormattedTotal()
+    {
+        // Method to get the originally stored total if needed
+        return number_format($this->total / 100, 2);
+    }
+
+    public function updateStoredTotal()
+    {
+        // Update the stored total to match the calculated total from items
+        $calculatedTotal = $this->getTotalAmount() * 100; // Convert to cents
+        $this->update(['total' => $calculatedTotal]);
+
+        return $this;
     }
 
     public function isPaid()

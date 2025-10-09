@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class PaymentDetail extends Model
 {
@@ -26,7 +26,7 @@ class PaymentDetail extends Model
     // Relationships
     public function orderDetail()
     {
-        return $this->belongsTo(OrderDetail::class);
+        return $this->belongsTo(OrderDetail::class, 'order_id');
     }
 
     // CRUD Operations
@@ -47,7 +47,7 @@ class PaymentDetail extends Model
 
     public static function getPaymentDetailsByOrder($orderDetailId)
     {
-        return self::where('order_detail_id', $orderDetailId)->get();
+        return self::where('order_id', $orderDetailId)->get();
     }
 
     public static function getPaymentDetailsWithOrder()
