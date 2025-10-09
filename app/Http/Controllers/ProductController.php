@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
@@ -23,10 +24,24 @@ class ProductController extends Controller
             $query->where('category_id', $request->category_id);
         }
 
-        // Get products with category relationship and paginate
-        $products = $query->with('category')->paginate(10);
+        // Apply search filter
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
 
-        return response()->json($products);
+        // Get products with category relationship and paginate
+        $products = $query->with('category')->paginate(12); // 12 items for better card grid layout
+
+        $categories = Category::all();
+
+        // If request wants JSON (API), return JSON
+        if ($request->expectsJson()) {
+            return response()->json($products);
+        }
+
+        // Otherwise return view
+        return view('products.index', compact('products', 'categories'));
     }
 
     /**
@@ -58,9 +73,17 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Product $product, Request $request)
     {
-        return response()->json($product->load('category'));
+        $product->load('category');
+
+        // If request wants JSON (API), return JSON
+        if ($request->expectsJson()) {
+            return response()->json($product);
+        }
+
+        // Otherwise return view
+        return view('products.show', compact('product'));
     }
 
     /**
