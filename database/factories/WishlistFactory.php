@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\User;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Wishlist>
  */
-class CategoryFactory extends Factory
+class WishlistFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +19,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->words(2, true),
-            'description' => fake()->paragraph(),
+            'user_id' => User::factory(),
+            'product_id' => Product::factory(),
         ];
     }
 }

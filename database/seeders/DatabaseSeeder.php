@@ -13,14 +13,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Run seeders in dependency order
         $this->call([
+                // Core data first
+            UserSeeder::class,
             CategorySeeder::class,
-            ProductSeeder::class
-        ]);
+            SubCategorySeeder::class,
+            ProductSeeder::class,
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+                // Product attributes and SKUs
+            ProductAttributeSeeder::class,
+            ProductSkuSeeder::class,
+
+                // User-related data
+            AddressSeeder::class,
+            WishlistSeeder::class,
+            CartSeeder::class,
+            CartItemSeeder::class,
+
+                // Order system
+            OrderDetailSeeder::class,
+            OrderItemSeeder::class,
+            PaymentDetailSeeder::class,
         ]);
     }
 }
