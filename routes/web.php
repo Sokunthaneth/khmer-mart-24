@@ -32,9 +32,17 @@ Route::middleware('auth')->group(function () {
 
 // Cart routes (available to both guests and authenticated users)
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+
+// SKU-based cart routes
+Route::post('/cart/add-sku', [CartController::class, 'addSku'])->name('cart.add.sku');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.update-quantity');
+
+// Legacy product-based cart route (keep for backward compatibility)
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/cart/update-quantity/{product}', [CartController::class, 'updateQuantity'])->name('cart.update-quantity');
+
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::post('/checkout', [CartController::class, 'submitOrder'])->name('cart.submit');
 
 require __DIR__.'/auth.php';

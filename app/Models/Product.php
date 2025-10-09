@@ -2,20 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use SoftDeletes, HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
         'description',
         'summary',
         'cover',
-        'category_id'
+        'category_id',
     ];
 
     protected function casts(): array
@@ -107,5 +107,45 @@ class Product extends Model
         return self::where('name', 'LIKE', "%{$query}%")
             ->orWhere('description', 'LIKE', "%{$query}%")
             ->get();
+    }
+
+    // Price Helper Methods
+    public function getPrice()
+    {
+        $sku = $this->productSkus()->first();
+
+        return $sku ? $sku->price : null;
+    }
+
+    public function getPriceRange()
+    {
+        $skus = $this->productSkus;
+        if ($skus->isEmpty()) {
+            return null;
+        }
+
+        $prices = $skus->pluck('price');
+        $minPrice = $prices->min();
+        $maxPrice = $prices->max();
+
+        if ($minPrice == $maxPrice) {
+            return number_format($minPrice, 2);
+        }
+
+        return number_format($minPrice, 2).' - '.number_format($maxPrice, 2);
+    }
+
+    public function getFormattedPrice()
+    {
+        $price = $this->getPrice();
+
+        return $price ? '$'.number_format($price, 2) : 'Price not available';
+    }
+
+    public function getFormattedPriceRange()
+    {
+        $priceRange = $this->getPriceRange();
+
+        return $priceRange ? '$'.$priceRange : 'Price not available';
     }
 }

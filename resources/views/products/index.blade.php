@@ -51,15 +51,18 @@
                             @foreach($products as $product)
                                 <div class="product-card group">
                                     <!-- Product Image -->
-                                    <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden bg-gray-200">
+                                    <div class="relative w-full h-48 overflow-hidden rounded-t-lg">
                                         @if($product->cover)
                                             <img
                                                 src="{{ $product->cover }}"
                                                 alt="{{ $product->name }}"
-                                                class="h-48 w-full object-cover object-center group-hover:opacity-75"
+                                                class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                                loading="lazy"
+                                                onload="this.style.opacity='1'"
+                                                style="opacity:0; transition: opacity 0.3s ease-in-out;"
                                             >
                                         @else
-                                            <div class="product-card-placeholder">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
                                                 <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                                 </svg>
@@ -91,38 +94,71 @@
                                             </p>
                                         @endif
 
+                                        <!-- Product Price -->
+                                        <div class="mb-3">
+                                            @if($product->productSkus->isNotEmpty())
+                                                @php
+                                                    $prices = $product->productSkus->pluck('price');
+                                                    $minPrice = $prices->min();
+                                                    $maxPrice = $prices->max();
+                                                @endphp
+                                                @if($minPrice == $maxPrice)
+                                                    <span class="text-lg font-bold text-blue-600">${{ number_format($minPrice, 2) }}</span>
+                                                @else
+                                                    <span class="text-lg font-bold text-blue-600">${{ number_format($minPrice, 2) }} - ${{ number_format($maxPrice, 2) }}</span>
+                                                @endif
+                                            @else
+                                                <span class="text-sm text-gray-500">Price not available</span>
+                                            @endif
+                                        </div>
+
                                         <!-- Product Actions -->
-                                        <div class="flex justify-between items-center mt-4">
+                                        <div class="flex justify-end mt-4">
                                             <a
                                                 href="{{ route('products.show', $product) }}"
-                                                class="text-blue-600 hover:text-blue-800 font-medium text-sm"
+                                                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded text-sm transition-colors duration-200 inline-flex items-center"
                                             >
                                                 View Details
+                                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
                                             </a>
-
-                                            @auth
-                                                <form action="{{ route('cart.add', $product) }}" method="POST" class="inline">
-                                                    @csrf
-                                                    <button
-                                                        type="submit"
-                                                        class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded text-sm transition-colors duration-200 flex items-center"
-                                                    >
-                                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2 2m2-2v4a2 2 0 002 2h2a2 2 0 002-2v-4M9 21h6"></path>
-                                                        </svg>
-                                                        Add to Cart
-                                                    </button>
-                                                </form>
-                                            @endauth
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
 
-                        <!-- Pagination -->
-                        <div class="flex justify-center">
-                            {{ $products->appends(request()->query())->links() }}
+                        <!-- Results Summary and Pagination -->
+                        <div class="mt-8 space-y-4">
+                            <!-- Showing Results Label -->
+                            <div class="text-center">
+                                <p class="text-sm text-gray-700">
+                                    Showing
+                                    <span class="font-medium">{{ $products->firstItem() ?? 0 }}</span>
+                                    to
+                                    <span class="font-medium">{{ $products->lastItem() ?? 0 }}</span>
+                                    of
+                                    <span class="font-medium">{{ $products->total() }}</span>
+                                    results
+                                    @if(request('search'))
+                                        for "<span class="font-medium text-blue-600">{{ request('search') }}</span>"
+                                    @endif
+                                    @if(request('category_id'))
+                                        @php
+                                            $selectedCategory = $categories->firstWhere('id', request('category_id'));
+                                        @endphp
+                                        @if($selectedCategory)
+                                            in <span class="font-medium text-blue-600">{{ $selectedCategory->name }}</span>
+                                        @endif
+                                    @endif
+                                </p>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="flex justify-center">
+                                {{ $products->appends(request()->query())->links() }}
+                            </div>
                         </div>
                     @else
                         <!-- No Products Found -->

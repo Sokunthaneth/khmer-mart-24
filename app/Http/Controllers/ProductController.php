@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -20,18 +17,24 @@ class ProductController extends Controller
         $query = Product::query();
 
         // Apply category filter
-        if ($request->has('category_id')) {
+        if ($request->filled('category_id')) {
             $query->where('category_id', $request->category_id);
         }
 
-        // Apply search filter
-        if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('description', 'like', '%' . $request->search . '%');
+        // Apply search filter with proper grouping
+        if ($request->filled('search')) {
+            $searchTerm = trim($request->search);
+            if ($searchTerm !== '') {
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('name', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('description', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('summary', 'like', '%'.$searchTerm.'%');
+                });
+            }
         }
 
-        // Get products with category relationship and paginate
-        $products = $query->with('category')->paginate(12); // 12 items for better card grid layout
+        // Get products with category and productSkus relationships and paginate
+        $products = $query->with(['category', 'productSkus'])->paginate(12)->appends($request->query());
 
         $categories = Category::all();
 
@@ -50,6 +53,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+
         return response()->json($categories);
     }
 
@@ -63,10 +67,11 @@ class ProductController extends Controller
             'name' => 'required|string|max:255|unique:products',
             'description' => 'nullable|string',
             'summary' => 'nullable|string',
-            'cover' => 'nullable|string|url'
+            'cover' => 'nullable|string|url',
         ]);
 
         $product = Product::create($validated);
+
         return response()->json($product, 201);
     }
 
@@ -75,7 +80,7 @@ class ProductController extends Controller
      */
     public function show(Product $product, Request $request)
     {
-        $product->load('category');
+        $product->load(['category', 'productSkus']);
 
         // If request wants JSON (API), return JSON
         if ($request->expectsJson()) {
@@ -92,9 +97,10 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
+
         return response()->json([
             'product' => $product,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -108,10 +114,11 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255', Rule::unique('products')->ignore($product->id)],
             'description' => 'nullable|string',
             'summary' => 'nullable|string',
-            'cover' => 'nullable|string|url'
+            'cover' => 'nullable|string|url',
         ]);
 
         $product->update($validated);
+
         return response()->json($product);
     }
 
@@ -121,6 +128,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
+
         return response()->json(null, 204);
     }
 }

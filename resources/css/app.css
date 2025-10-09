@@ -31,14 +31,14 @@
 /* Product card hover effects */
 @layer components {
     .product-card {
-        @apply bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden transform hover:scale-105;
+        @apply bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105;
     }
 
     .product-card-image {
-        @apply h-48 w-full object-cover object-center group-hover:opacity-75 transition-opacity duration-300;
+        @apply absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300;
     }
 
     .product-card-placeholder {
-        @apply h-48 w-full bg-gray-300 flex items-center justify-center;
+        @apply absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center;
     }
 }
