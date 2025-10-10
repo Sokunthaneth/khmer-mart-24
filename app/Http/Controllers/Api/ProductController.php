@@ -20,7 +20,7 @@ class ProductController extends Controller
 
         // Search by name if provided
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+            $query->where('name', 'like', '%'.$request->search.'%');
         }
 
         // Sort by price if specified
@@ -43,18 +43,20 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'category_id' => 'required|exists:categories,id'
+            'summary' => 'sometimes|string',
+            'cover' => 'sometimes|string',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation error',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         $product = Product::create($request->all());
+
         return new ProductResource($product);
     }
 
@@ -65,9 +67,9 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        if (!$product) {
+        if (! $product) {
             return response()->json([
-                'message' => 'Product not found'
+                'message' => 'Product not found',
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -82,28 +84,35 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        if (!$product) {
+        if (! $product) {
             return response()->json([
-                'message' => 'Product not found'
+                'message' => 'Product not found',
             ], Response::HTTP_NOT_FOUND);
         }
 
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|required|string|max:255',
-            'description' => 'sometimes|required|string',
-            'price' => 'sometimes|required|numeric|min:0',
-            'category_id' => 'sometimes|required|exists:categories,id'
+            'description' => 'sometimes|string',
+            'cover' => 'sometimes|string',
+            'summary' => 'sometimes|string',
+            'category_id' => 'sometimes|required|exists:categories,id',
         ]);
 
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation error',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $product->update($request->all());
-        return new ProductResource($product);
+        // Only update the fields that are provided in the request
+        $updateData = $request->only(['name', 'description', 'cover', 'summary', 'category_id']);
+        $product->update($updateData);
+
+        return response()->json([
+            'message' => 'Product updated successfully',
+            'data' => new ProductResource($product),
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -113,13 +122,14 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        if (!$product) {
+        if (! $product) {
             return response()->json([
-                'message' => 'Product not found'
+                'message' => 'Product not found',
             ], Response::HTTP_NOT_FOUND);
         }
 
         $product->delete();
+
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
