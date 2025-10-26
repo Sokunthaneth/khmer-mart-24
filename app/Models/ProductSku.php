@@ -18,14 +18,16 @@ class ProductSku extends Model
         'color_attribute_id',
         'sku',
         'price',
-        'quantity',
+        'stock',
+        'attributes',
     ];
 
     protected function casts(): array
     {
         return [
-            'price' => 'float',
-            'quantity' => 'integer',
+            'price' => 'decimal:2',
+            'stock' => 'integer',
+            'attributes' => 'array',
             'deleted_at' => 'datetime',
         ];
     }
@@ -53,7 +55,7 @@ class ProductSku extends Model
 
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class, 'product_sku_id');
     }
 
     // CRUD Operations

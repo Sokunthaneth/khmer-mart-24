@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
@@ -36,7 +37,10 @@ class ProductController extends Controller
         // Get products with category and productSkus relationships and paginate
         $products = $query->with(['category', 'productSkus'])->paginate(12)->appends($request->query());
 
-        $categories = Category::all();
+        // Cache categories with product counts for 5 minutes (300 seconds)
+        $categories = Cache::remember('categories_with_counts', 300, function() {
+            return Category::withCount('products')->get();
+        });
 
         // If request wants JSON (API), return JSON
         if ($request->expectsJson()) {

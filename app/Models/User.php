@@ -118,6 +118,11 @@ class User extends Authenticatable
         return $this->hasMany(OrderDetail::class);
     }
 
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
     /**
      * Send the password reset notification.
      *

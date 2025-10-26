@@ -12,23 +12,25 @@ class OrderItem extends Model
     protected $table = 'order_item';
 
     protected $fillable = [
-        'order_id',
+        'order_detail_id',
         'product_id',
-        'products_sku_id',
-        'quantity',
+        'product_sku_id',
+        'qty',
+        'unit_price',
     ];
 
     protected function casts(): array
     {
         return [
-            'quantity' => 'integer',
+            'qty' => 'integer',
+            'unit_price' => 'decimal:2',
         ];
     }
 
     // Relationships
-    public function order()
+    public function orderDetail()
     {
-        return $this->belongsTo(OrderDetail::class, 'order_id');
+        return $this->belongsTo(OrderDetail::class, 'order_detail_id');
     }
 
     public function product()
@@ -38,7 +40,15 @@ class OrderItem extends Model
 
     public function productSku()
     {
-        return $this->belongsTo(ProductSku::class, 'products_sku_id');
+        return $this->belongsTo(ProductSku::class, 'product_sku_id');
+    }
+
+    /**
+     * Get subtotal for this order item
+     */
+    public function getSubtotalAttribute()
+    {
+        return $this->qty * $this->unit_price;
     }
 
     // CRUD Operations

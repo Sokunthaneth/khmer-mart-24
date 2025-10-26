@@ -13,12 +13,13 @@ class OrderDetail extends Model
         'user_id',
         'payment_id',
         'total',
+        'status',
     ];
 
     protected function casts(): array
     {
         return [
-            'total' => 'integer',
+            'total' => 'decimal:2',
         ];
     }
 
@@ -35,7 +36,7 @@ class OrderDetail extends Model
 
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class, 'order_id');
+        return $this->hasMany(OrderItem::class, 'order_detail_id');
     }
 
     // CRUD Operations

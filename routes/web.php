@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -45,5 +46,11 @@ Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.a
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 Route::post('/checkout', [CartController::class, 'submitOrder'])->name('cart.submit');
+
+// Checkout routes (authenticated users only)
+Route::middleware('auth')->group(function () {
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/orders/{orderId}/success', [CheckoutController::class, 'success'])->name('order.success');
+});
 
 require __DIR__.'/auth.php';
