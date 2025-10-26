@@ -2,58 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CategoryResource;
-use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of products with pagination.
+     * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $query = Product::query();
 
         // Apply category filter
-        if ($request->has('category_id')) {
+        if ($request->filled('category_id')) {
             $query->where('category_id', $request->category_id);
         }
 
-        // Apply price range filter
-        if ($request->has(['min_price', 'max_price'])) {
-            $query->whereBetween('price', [$request->min_price, $request->max_price]);
+        // Apply search filter with proper grouping
+        if ($request->filled('search')) {
+            $searchTerm = trim($request->search);
+            if ($searchTerm !== '') {
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('name', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('description', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('summary', 'like', '%'.$searchTerm.'%');
+                });
+            }
         }
 
-        // Cache the paginated results
-        $cacheKey = 'products.page.' . ($request->page ?? 1);
-        $products = Cache::remember($cacheKey, 300, function () use ($query) {
-            return $query->with('category')
-                ->orderBy('created_at', 'desc')
-                ->paginate(12);
-        });
+        // Get products with category and productSkus relationships and paginate
+        $products = $query->with(['category', 'productSkus'])->paginate(12)->appends($request->query());
 
-        if ($request->wantsJson()) {
-            return ProductResource::collection($products);
+        $categories = Category::all();
+
+        // If request wants JSON (API), return JSON
+        if ($request->expectsJson()) {
+            return response()->json($products);
         }
 
-        return view('products.index', compact('products'));
-    }
-
-    /**
-     * Display all categories with their product counts.
-     */
-    public function categories()
-    {
-        $categories = Cache::remember('categories.with.counts', 600, function () {
-            return Category::withCount('products')->get();
-        });
-
-        return CategoryResource::collection($categories);
+        // Otherwise return view
+        return view('products.index', compact('products', 'categories'));
     }
 
     /**
@@ -73,16 +64,12 @@ class ProductController extends Controller
         $validated = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255|unique:products',
-            'sku' => 'required|string|max:50|unique:products',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'summary' => 'nullable|string',
+            'cover' => 'nullable|string|url',
         ]);
 
         $product = Product::create($validated);
-
-        // Clear the products cache
-        Cache::tags(['products'])->flush();
 
         return response()->json($product, 201);
     }
@@ -90,9 +77,17 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show(Product $product, Request $request)
     {
-        return response()->json($product->load('category'));
+        $product->load(['category', 'productSkus']);
+
+        // If request wants JSON (API), return JSON
+        if ($request->expectsJson()) {
+            return response()->json($product);
+        }
+
+        // Otherwise return view
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -101,9 +96,10 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
+
         return response()->json([
             'product' => $product,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -115,47 +111,14 @@ class ProductController extends Controller
         $validated = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => ['required', 'string', 'max:255', Rule::unique('products')->ignore($product->id)],
-            'sku' => ['required', 'string', 'max:50', Rule::unique('products')->ignore($product->id)],
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'summary' => 'nullable|string',
+            'cover' => 'nullable|string|url',
         ]);
 
         $product->update($validated);
 
-        // Clear the products cache
-        Cache::tags(['products'])->flush();
-
         return response()->json($product);
-    }
-
-    /**
-     * Search products with pagination.
-     */
-    public function search(Request $request)
-    {
-        $query = Product::query();
-
-        if ($request->has('category')) {
-            $query->where('category_id', $request->category);
-        }
-
-        if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
-        }
-
-        if ($request->has('sort_by')) {
-            $direction = $request->sort_direction === 'desc' ? 'desc' : 'asc';
-            $query->orderBy($request->sort_by, $direction);
-        }
-
-        $products = $query->paginate(12);
-
-        if ($request->wantsJson()) {
-            return ProductResource::collection($products);
-        }
-
-        return view('products.index', compact('products'));
     }
 
     /**
@@ -164,9 +127,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-
-        // Clear the products cache
-        Cache::tags(['products'])->flush();
 
         return response()->json(null, 204);
     }

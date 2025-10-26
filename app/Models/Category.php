@@ -2,44 +2,72 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'slug'
-    ];
+    protected $fillable = ['name', 'description'];
 
-    /**
-     * Get the products for the category.
-     */
-    public function products(): HasMany
+    protected function casts(): array
     {
-        return $this->hasMany(Product::class);
+        return [
+            'deleted_at' => 'datetime',
+        ];
     }
 
-    /**
-     * Boot the model.
-     */
-    protected static function boot()
+    // Relationships
+    public function products()
     {
-        parent::boot();
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
 
-        static::creating(function ($category) {
-            $category->slug = Str::slug($category->name);
-        });
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class, 'parent_id');
+    }
 
-        static::updating(function ($category) {
-            if ($category->isDirty('name')) {
-                $category->slug = Str::slug($category->name);
-            }
-        });
+    // CRUD Operations
+    public static function createCategory(array $data)
+    {
+        return self::create($data);
+    }
+
+    public static function getCategoryById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function getAllCategories()
+    {
+        return self::all();
+    }
+
+    public static function getCategoriesWithSubCategories()
+    {
+        return self::with('subCategories')->get();
+    }
+
+    public static function getCategoriesWithProducts()
+    {
+        return self::with('products')->get();
+    }
+
+    public function updateCategory(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteCategory()
+    {
+        return $this->delete();
+    }
+
+    public static function getCategoryByName($name)
+    {
+        return self::where('name', $name)->first();
     }
 }

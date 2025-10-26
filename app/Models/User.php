@@ -3,15 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,10 +21,15 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'avatar',
+        'first_name',
+        'last_name',
+        'username',
         'email',
+        'role',
         'password',
-        'is_admin',
+        'birth_of_date',
+        'phone_number',
     ];
 
     /**
@@ -49,11 +56,76 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get all orders for the user.
-     */
-    public function orders(): HasMany
+    // CRUD Operations
+    public static function createUser(array $data)
     {
-        return $this->hasMany(Order::class);
+        return self::create($data);
+    }
+
+    public static function getUserById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function getUserByEmail($email)
+    {
+        return self::where('email', $email)->first();
+    }
+
+    public static function getAllUsers()
+    {
+        return self::all();
+    }
+
+    public function updateUser(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteUser()
+    {
+        return $this->delete();
+    }
+
+    public static function getUsersWithAddresses()
+    {
+        return self::with('addresses')->get();
+    }
+
+    public static function getUsersWithOrders()
+    {
+        return self::with('orderDetails')->get();
+    }
+
+    // Relationships
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }
