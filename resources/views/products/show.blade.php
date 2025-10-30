@@ -95,8 +95,8 @@
                                                                     @endif
                                                                 </div>
                                                                 <div class="text-xs text-gray-500">SKU: {{ $sku->sku }}</div>
-                                                                @if($sku->quantity > 0)
-                                                                    <div class="text-xs text-green-600">{{ $sku->quantity }} in stock</div>
+                                                                @if($sku->stock > 0)
+                                                                    <div class="text-xs text-green-600">{{ $sku->stock }} in stock</div>
                                                                 @else
                                                                     <div class="text-xs text-red-600">Out of stock</div>
                                                                 @endif

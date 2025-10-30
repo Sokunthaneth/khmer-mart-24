@@ -32,7 +32,7 @@ class CartController extends Controller
                         'price' => $price,
                         'quantity' => $quantity,
                         'subtotal' => $subtotal,
-                        'available_stock' => $productSku->quantity,
+                        'available_stock' => $productSku->stock,
                     ];
                     $total += $subtotal;
                 }
@@ -73,9 +73,9 @@ class CartController extends Controller
         $currentCartQuantity = isset($cart[$id]) ? $cart[$id] : 0;
         $totalRequestedQuantity = $currentCartQuantity + $quantity;
 
-        if ($totalRequestedQuantity > $productSku->quantity) {
+        if ($totalRequestedQuantity > $productSku->stock) {
             return response()->json([
-                'message' => 'Not enough stock available. Available: '.$productSku->quantity.', Requested: '.$totalRequestedQuantity,
+                'message' => 'Not enough stock available. Available: '.$productSku->stock.', Requested: '.$totalRequestedQuantity,
             ], Response::HTTP_BAD_REQUEST);
         }
 
@@ -145,9 +145,9 @@ class CartController extends Controller
         }
 
         // Check if enough stock is available
-        if ($quantity > $productSku->quantity) {
+        if ($quantity > $productSku->stock) {
             return response()->json([
-                'message' => 'Not enough stock available. Available: '.$productSku->quantity.', Requested: '.$quantity,
+                'message' => 'Not enough stock available. Available: '.$productSku->stock.', Requested: '.$quantity,
             ], Response::HTTP_BAD_REQUEST);
         }
 

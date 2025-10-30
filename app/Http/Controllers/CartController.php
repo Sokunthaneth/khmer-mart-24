@@ -58,12 +58,12 @@ class CartController extends Controller
         $quantity = $request->input('quantity', 1);
 
         // Check if SKU has enough stock
-        if ($productSku->quantity < $quantity) {
+        if ($productSku->stock < $quantity) {
             return back()->with('error', 'Not enough stock available');
         }
 
         // Check if SKU is in stock
-        if ($productSku->quantity <= 0) {
+        if ($productSku->stock <= 0) {
             return back()->with('error', 'This item is out of stock');
         }
 
@@ -72,7 +72,7 @@ class CartController extends Controller
         $newQuantity = $currentQuantity + $quantity;
 
         // Check total quantity doesn't exceed stock
-        if ($newQuantity > $productSku->quantity) {
+        if ($newQuantity > $productSku->stock) {
             return back()->with('error', 'Cannot add more items than available in stock');
         }
 
@@ -165,7 +165,7 @@ class CartController extends Controller
 
         if ($quantity > 0) {
             // Check stock availability
-            if ($quantity > $sku->quantity) {
+            if ($quantity > $sku->stock) {
                 return back()->with('error', 'Not enough stock available');
             }
 
@@ -265,10 +265,11 @@ class CartController extends Controller
                 $quantity = $cart[$sku->id];
 
                 OrderItem::createOrderItem([
-                    'order_id' => $orderDetail->id,
+                    'order_detail_id' => $orderDetail->id,
                     'product_id' => $sku->product->id,
-                    'products_sku_id' => $sku->id,
-                    'quantity' => $quantity,
+                    'product_sku_id' => $sku->id,
+                    'qty' => $quantity,
+                    'unit_price' => floatval($sku->price),
                 ]);
             }
 
@@ -291,8 +292,14 @@ class CartController extends Controller
             // Rollback the transaction on error
             DB::rollback();
 
+            // Log the actual error for debugging
+            \Log::error('Order submission failed: '.$e->getMessage(), [
+                'exception' => $e,
+                'trace' => $e->getTraceAsString(),
+            ]);
+
             return redirect()->route('cart.checkout')
-                ->with('error', 'Failed to process order. Please try again.');
+                ->with('error', 'Failed to process order. Please try again. Error: '.$e->getMessage());
         }
     }
 
