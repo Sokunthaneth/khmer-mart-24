@@ -28,10 +28,11 @@ class OrderItemSeeder extends Seeder
                 $productSkus = ProductSku::where('product_id', $product->id)->get();
                 if ($productSkus->count() > 0) {
                     OrderItem::create([
-                        'order_id' => $order->id,
+                        'order_detail_id' => $order->id,
                         'product_id' => $product->id,
-                        'products_sku_id' => $productSkus->random()->id,
-                        'quantity' => rand(1, 5),
+                        'product_sku_id' => $productSkus->random()->id,
+                        'qty' => rand(1, 5),
+                        'unit_price' => rand(20, 500)
                     ]);
                 }
             }

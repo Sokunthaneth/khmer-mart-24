@@ -30,7 +30,7 @@ class ProductSkuSeeder extends Seeder
                     'color_attribute_id' => $colorAttributes->random()->id,
                     'sku' => strtoupper(fake()->unique()->bothify('??##??####')),
                     'price' => fake()->randomFloat(2, 5, 1000),
-                    'quantity' => fake()->numberBetween(0, 100),
+                    'stock' => fake()->numberBetween(0, 100),
                 ]);
             }
         }
