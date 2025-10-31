@@ -1,50 +1,41 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminProductController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\OrderController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
-// Public API routes
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{product}', [ProductController::class, 'show']);
-Route::get('/categories', [ProductController::class, 'categories']);
-
-// Health check endpoint
-Route::get('/health', function () {
-    return response()->json([
-        'status' => 'ok',
-        'timestamp' => now()->toISOString(),
-        'environment' => app()->environment(),
-        'version' => '1.0.0'
-    ]);
+// Authentication routes (public)
+Route::prefix('auth')->group(function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 });
 
-// Protected API routes
-Route::middleware(['auth:sanctum'])->group(function () {
-    // User orders
-    Route::get('/orders', [OrderController::class, 'index']);
-    Route::post('/orders', [OrderController::class, 'store']);
-    Route::get('/orders/{order}', [OrderController::class, 'show']);
-    Route::patch('/orders/{order}/cancel', [OrderController::class, 'cancel']);
+// Public routes
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
 
-    // Admin only routes with rate limiting
-    Route::middleware(['admin', 'throttle:60,1'])->prefix('admin')->group(function () {
-        // Product management (more restrictive rate limiting for inventory updates)
-        Route::get('/products', [AdminProductController::class, 'index']);
-        Route::get('/products/{product}', [AdminProductController::class, 'show']);
-        Route::middleware(['throttle:30,1'])->group(function () {
-            Route::patch('/products/{product}/inventory', [AdminProductController::class, 'updateInventory']);
-            Route::patch('/products/bulk-inventory', [AdminProductController::class, 'bulkUpdateInventory']);
-        });
-
-        // Order management
-        Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus']);
-        Route::get('/orders/statistics', [OrderController::class, 'statistics']);
+// Protected routes (require authentication)
+Route::middleware('auth:sanctum')->group(function () {
+    // Authentication routes (protected)
+    Route::prefix('auth')->group(function () {
+        Route::get('/user', [AuthController::class, 'user']);
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/logout-all', [AuthController::class, 'logoutAllDevices']);
     });
+
+    // Product management
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::patch('/products/{id}', [ProductController::class, 'update']);
+    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
+    // Cart management
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/cart/count', [CartController::class, 'count']);
+    Route::post('/cart/add/{id}', [CartController::class, 'add']);
+    Route::patch('/cart/update/{id}', [CartController::class, 'update']);
+    Route::post('/cart/remove/{id}', [CartController::class, 'remove']);
+    Route::post('/cart/clear', [CartController::class, 'clear']);
 });
