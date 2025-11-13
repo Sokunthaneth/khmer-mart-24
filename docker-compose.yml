@@ -12,6 +12,7 @@ services:
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
+      - APP_KEY=base64:fjuqn2+5C2blp/isTTshvUscL6FyxyEkZdVSrqAV59k=
       - DB_HOST=mysql
       - DB_DATABASE=khmermart24
       - DB_USERNAME=khmermart24

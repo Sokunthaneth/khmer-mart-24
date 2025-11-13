@@ -22,3 +22,7 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+km24-react/dist
+km24-react/node_modules
+km24-react/.env.local
+
