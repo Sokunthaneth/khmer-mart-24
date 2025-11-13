@@ -1,0 +1,2969 @@
+{
+	"info": {
+		"_postman_id": "41b88697-eb5d-4c88-a1ef-4e22ff62f097",
+		"name": "KhmerMart24",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9835620"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "dara",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "ly",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "ly_dara",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ly_dara@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "P@ssword123",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "010112233",
+									"type": "text"
+								},
+								{
+									"key": "birth_of_date",
+									"value": "2000-12-25",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/auth/register",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "dara",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "ly",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "ly_dara",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "ly_dara@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword123",
+											"type": "text"
+										},
+										{
+											"key": "phone_number",
+											"value": "010112233",
+											"type": "text"
+										},
+										{
+											"key": "birth_of_date",
+											"value": "2000-12-25",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/register",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 02:51:31 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User registered successfully\",\n    \"data\": {\n        \"user\": {\n            \"id\": 23,\n            \"first_name\": \"dara\",\n            \"last_name\": \"ly\",\n            \"username\": \"ly_dara\",\n            \"email\": \"ly_dara@gmail.com\",\n            \"phone_number\": \"010112233\",\n            \"birth_of_date\": \"2000-12-25\",\n            \"role\": \"customer\"\n        },\n        \"access_token\": \"1|jH8U4yzCLFXLu3Tot08jLWC6VIALZwCNw32pC0Sb01524052\",\n        \"token_type\": \"Bearer\"\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "first_name",
+											"value": "dara",
+											"type": "text"
+										},
+										{
+											"key": "last_name",
+											"value": "ly",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "ly_dara",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "ly_dara@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword123",
+											"type": "text"
+										},
+										{
+											"key": "phone_number",
+											"value": "010112233",
+											"type": "text"
+										},
+										{
+											"key": "birth_of_date",
+											"value": "2000-12-25",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/register",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 02:51:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Validation errors\",\n    \"errors\": {\n        \"username\": [\n            \"The username has already been taken.\"\n        ],\n        \"email\": [\n            \"The email has already been taken.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Extract 'access_token' from OAuth2-style JSON response and save to variable",
+									"pm.test(\"Extract and save access_token\", function () {",
+									"    if (pm.response.code === 200) {",
+									"        var jsonData = pm.response.json();",
+									"        if (jsonData && jsonData.data.access_token) {",
+									"            pm.collectionVariables.set(\"access_token\", jsonData.data.access_token);",
+									"        } else {",
+									"            pm.collectionVariables.unset(\"access_token\");",
+									"        }",
+									"        pm.expect(jsonData.data.access_token, \"Response should contain access_token\").to.exist;",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@khmermart.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/auth/login",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "ly_dara@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/login",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:11:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"user\": {\n            \"id\": 23,\n            \"first_name\": \"dara\",\n            \"last_name\": \"ly\",\n            \"username\": \"ly_dara\",\n            \"email\": \"ly_dara@gmail.com\",\n            \"phone_number\": \"010112233\",\n            \"birth_of_date\": \"2000-12-25\",\n            \"role\": \"customer\"\n        },\n        \"access_token\": \"2|ecqoT1uBNR0LRmlhmi69V7UqX2SMSyGriWT2nYFuc7d83477\",\n        \"token_type\": \"Bearer\"\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "ly_dara@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/login",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:13:56 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid credentials\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "ly_dara@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/auth/forgot-password",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "ly_dara@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/forgot-password",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:15:59 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Password reset link sent to your email\"\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "lyy_dara@gmail.com",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/forgot-password",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:16:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Validation errors\",\n    \"errors\": {\n        \"email\": [\n            \"No account found with this email address.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "ly_dara@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "P@ssword12345",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "P@ssword12345",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "aea9b0faa46ddec0387532693b857cdd3821db42d8049fcc59461410e64fd33b",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/auth/reset-password",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "sokunthaneth.chhoy@nbc.gov.kh",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword12345",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssword12345",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "$2y$12$fQ82hm2RipogXxHTP3BrJuxIl64IZkSCe.B6UAFtFxr6QybzVHLCy",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/reset-password",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:38:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Failed to reset password. Invalid token or email.\"\n}"
+						},
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "sokunthaneth.chhoy@nbc.gov.kh",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword12345",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "P@ssword12345",
+											"type": "text"
+										},
+										{
+											"key": "token",
+											"value": "aea9b0faa46ddec0387532693b857cdd3821db42d8049fcc59461410e64fd33b",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/reset-password",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:39:15 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Password reset successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Extract 'access_token' from OAuth2-style JSON response and remove variable",
+									"pm.test(\"Extract and remove access_token\", function () {",
+									"    if (pm.response.code === 200) {",
+									"        pm.collectionVariables.set(\"access_token\", \"\");",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/auth/logout",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/logout",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:56:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Logged out successfully\"\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/logout",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:57:18 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6IlZJWmp2K3Z4N0h2UHd6ZFhHM1VCYlE9PSIsInZhbHVlIjoiRWk1bTRlaXppdk1tY25uaGxwaWYxZUxzUXlscHd6MWFhRDRSWFhWeGJnKzdBZHh1bUJ0TWVkY25EODQ5dkc3QlRDWDduaU1uMk1LdW1TeTdJTERoMzE4dXdvclRDTEROYi9SRnYyY0xEQytnVm11Zlh3TUd2UmFBVG1OVENiMEkiLCJtYWMiOiJkMmUyNGRhMzE4ZTM5NDdiNmUzNGIxMGFmMGNhZGNiNjAwOTNkMTk3MDBlODFhNTJkM2MwM2ZjZTliZjc1ZTFmIiwidGFnIjoiIn0%3D; expires=Fri, 10 Oct 2025 05:57:18 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=eyJpdiI6Im8wMXRuRjlGK3VZcW03S1o3cjJZZmc9PSIsInZhbHVlIjoiR3NYczNySjdFV2l2T1ZrWjhJNHVkVTdWa0pwNlRmSXpDVEc1ZE5lTk9wbktLQVFRTkhhNHZhZVRaZCtNK2tYZi84MkZZNVNvbE1GVWw2ZEt2TU1nOHU4SGhTOE5SWnB4c0R3cXFzcFVZdUY5V2U3bEZ1NWVOdTZ1STZ0bExzK1IiLCJtYWMiOiI0NDRiMjNhZGVmYTE3YWNlMWQxZmZkNDcxZmEwNGRlZTJjMWIzYjM3ZDc4NTcwNzdjZGFmYWRkOThjZWU4MDcyIiwidGFnIjoiIn0%3D; expires=Fri, 10 Oct 2025 05:57:18 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <meta name=\"csrf-token\" content=\"tE498gouHYcBvucd7v4H9AMpKNEw3e4D8wIacJSi\">\n        <title>Laravel</title>\n        <!-- Fonts -->\n        <link rel=\"preconnect\" href=\"https://fonts.bunny.net\">\n        <link href=\"https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap\" rel=\"stylesheet\" />\n        <!-- Scripts -->\n        <link rel=\"preload\" as=\"style\" href=\"http://localhost:8000/build/assets/app-ltE_t2u8.css\" />\n        <link rel=\"modulepreload\" as=\"script\" href=\"http://localhost:8000/build/assets/app-CXDpL9bK.js\" />\n        <link rel=\"stylesheet\" href=\"http://localhost:8000/build/assets/app-ltE_t2u8.css\" />\n        <script type=\"module\" src=\"http://localhost:8000/build/assets/app-CXDpL9bK.js\"></script>\n    </head>\n    <body class=\"font-sans text-gray-900 antialiased\">\n        <div class=\"min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100\">\n            <div>\n                <a href=\"/\">\n                    <svg viewBox=\"0 0 316 316\" xmlns=\"http://www.w3.org/2000/svg\" class=\"w-20 h-20 fill-current text-gray-500\">\n                        <path d=\"M305.8 81.125C305.77 80.995 305.69 80.885 305.65 80.755C305.56 80.525 305.49 80.285 305.37 80.075C305.29 79.935 305.17 79.815 305.07 79.685C304.94 79.515 304.83 79.325 304.68 79.175C304.55 79.045 304.39 78.955 304.25 78.845C304.09 78.715 303.95 78.575 303.77 78.475L251.32 48.275C249.97 47.495 248.31 47.495 246.96 48.275L194.51 78.475C194.33 78.575 194.19 78.725 194.03 78.845C193.89 78.955 193.73 79.045 193.6 79.175C193.45 79.325 193.34 79.515 193.21 79.685C193.11 79.815 192.99 79.935 192.91 80.075C192.79 80.285 192.71 80.525 192.63 80.755C192.58 80.875 192.51 80.995 192.48 81.125C192.38 81.495 192.33 81.875 192.33 82.265V139.625L148.62 164.795V52.575C148.62 52.185 148.57 51.805 148.47 51.435C148.44 51.305 148.36 51.195 148.32 51.065C148.23 50.835 148.16 50.595 148.04 50.385C147.96 50.245 147.84 50.125 147.74 49.995C147.61 49.825 147.5 49.635 147.35 49.485C147.22 49.355 147.06 49.265 146.92 49.155C146.76 49.025 146.62 48.885 146.44 48.785L93.99 18.585C92.64 17.805 90.98 17.805 89.63 18.585L37.18 48.785C37 48.885 36.86 49.035 36.7 49.155C36.56 49.265 36.4 49.355 36.27 49.485C36.12 49.635 36.01 49.825 35.88 49.995C35.78 50.125 35.66 50.245 35.58 50.385C35.46 50.595 35.38 50.835 35.3 51.065C35.25 51.185 35.18 51.305 35.15 51.435C35.05 51.805 35 52.185 35 52.575V232.235C35 233.795 35.84 235.245 37.19 236.025L142.1 296.425C142.33 296.555 142.58 296.635 142.82 296.725C142.93 296.765 143.04 296.835 143.16 296.865C143.53 296.965 143.9 297.015 144.28 297.015C144.66 297.015 145.03 296.965 145.4 296.865C145.5 296.835 145.59 296.775 145.69 296.745C145.95 296.655 146.21 296.565 146.45 296.435L251.36 236.035C252.72 235.255 253.55 233.815 253.55 232.245V174.885L303.81 145.945C305.17 145.165 306 143.725 306 142.155V82.265C305.95 81.875 305.89 81.495 305.8 81.125ZM144.2 227.205L100.57 202.515L146.39 176.135L196.66 147.195L240.33 172.335L208.29 190.625L144.2 227.205ZM244.75 114.995V164.795L226.39 154.225L201.03 139.625V89.825L219.39 100.395L244.75 114.995ZM249.12 57.105L292.81 82.265L249.12 107.425L205.43 82.265L249.12 57.105ZM114.49 184.425L96.13 194.995V85.305L121.49 70.705L139.85 60.135V169.815L114.49 184.425ZM91.76 27.425L135.45 52.585L91.76 77.745L48.07 52.585L91.76 27.425ZM43.67 60.135L62.03 70.705L87.39 85.305V202.545V202.555V202.565C87.39 202.735 87.44 202.895 87.46 203.055C87.49 203.265 87.49 203.485 87.55 203.695V203.705C87.6 203.875 87.69 204.035 87.76 204.195C87.84 204.375 87.89 204.575 87.99 204.745C87.99 204.745 87.99 204.755 88 204.755C88.09 204.905 88.22 205.035 88.33 205.175C88.45 205.335 88.55 205.495 88.69 205.635L88.7 205.645C88.82 205.765 88.98 205.855 89.12 205.965C89.28 206.085 89.42 206.225 89.59 206.325C89.6 206.325 89.6 206.325 89.61 206.335C89.62 206.335 89.62 206.345 89.63 206.345L139.87 234.775V285.065L43.67 229.705V60.135ZM244.75 229.705L148.58 285.075V234.775L219.8 194.115L244.75 179.875V229.705ZM297.2 139.625L253.49 164.795V114.995L278.85 100.395L297.21 89.825V139.625H297.2Z\"/>\n                    </svg>\n                </a>\n            </div>\n            <div class=\"w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg\">\n                <!-- Session Status -->\n                <form method=\"POST\" action=\"http://localhost:8000/login\">\n                    <input type=\"hidden\" name=\"_token\" value=\"tE498gouHYcBvucd7v4H9AMpKNEw3e4D8wIacJSi\" autocomplete=\"off\">\n                    <!-- Email Address -->\n                    <div>\n                        <label class=\"block font-medium text-sm text-gray-700\" for=\"email\">\n    Email\n</label>\n                        <input  class=\"border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full\" id=\"email\" type=\"email\" name=\"email\" required=\"required\" autofocus=\"autofocus\" autocomplete=\"username\">\n                    \n                    </div>\n                    <!-- Password -->\n                    <div class=\"mt-4\">\n                        <label class=\"block font-medium text-sm text-gray-700\" for=\"password\">\n    Password\n</label>\n                        <input  class=\"border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full\" id=\"password\" type=\"password\" name=\"password\" required=\"required\" autocomplete=\"current-password\">\n\n                    \n                    </div>\n                    <!-- Remember Me -->\n                    <div class=\"block mt-4\">\n                        <label for=\"remember_me\" class=\"inline-flex items-center\">\n                            <input id=\"remember_me\" type=\"checkbox\" class=\"rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500\" name=\"remember\">\n                            <span class=\"ms-2 text-sm text-gray-600\">Remember me</span>\n                        </label>\n                    </div>\n                    <div class=\"flex items-center justify-end mt-4\">\n                        <a class=\"underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500\" href=\"http://localhost:8000/forgot-password\">\n                    Forgot your password?\n                </a>\n                        <button type=\"submit\" class=\"inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3\">\n    Log in\n</button>\n                    </div>\n                </form>\n            </div>\n        </div>\n    </body>\n</html>"
+						}
+					]
+				},
+				{
+					"name": "Logout All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/auth/logout-all",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"auth",
+								"logout-all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/logout-all",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"logout-all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 04:00:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Logged out from all devices successfully\"\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/logout-all",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"logout-all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 04:00:38 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6IkNYbUUrd2ZsZmxiaUNFTFRuRU1KWHc9PSIsInZhbHVlIjoiNUNVbGZXblBWUXF4eVBGVm52OUNuR2J3bjlza004WlJZc0FKd3dyZmF0TTBCTWxGMWdrOThIajVUdXhOeFZDM1I4S3FlM3oxMHNFV0tkb1o4VUI4N29GUjkyQnQyRlErSk1NN0dERG9BUEJ1OU9PeHhLMjBQUzFFakxLYkM5ZjEiLCJtYWMiOiI4OWRjOTcxOWYxOWU1MzBiMzVkMmRjYWJmNmI0YmYwZDRiNjEwZGNkMWI5YzU0ODhmMGRhYzExNmVhNjE2YTE0IiwidGFnIjoiIn0%3D; expires=Fri, 10 Oct 2025 06:00:38 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=eyJpdiI6IkljSFBiY0c3K1BvS3NDZ0lxcWV2MlE9PSIsInZhbHVlIjoiZmFrTHV0QW5RRm53dXd3eFFQeFBDaGZQZjdWWFdvTWs4ZUFTc2YrOWU3MlhHMHFzc0RHVjMza0R6WTlTT1MvdHlwZVgveGZBNXNmSWcwNGFFTGdHSW9iYmVvMURHTEM0L2M4KzVrcng4Z3h0SGVaY2FjUUxBWjdTTnhwanQ4bkoiLCJtYWMiOiJiNDQxYWY5OTA3YjJjMDU2ZDBiMmQzODI4ZDc1NzlhOWViMTdmYzQ4N2Y0YThiZTEwNWQ1NGZkMTQzNWVkZGY1IiwidGFnIjoiIn0%3D; expires=Fri, 10 Oct 2025 06:00:38 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <meta name=\"csrf-token\" content=\"tE498gouHYcBvucd7v4H9AMpKNEw3e4D8wIacJSi\">\n        <title>Laravel</title>\n        <!-- Fonts -->\n        <link rel=\"preconnect\" href=\"https://fonts.bunny.net\">\n        <link href=\"https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap\" rel=\"stylesheet\" />\n        <!-- Scripts -->\n        <link rel=\"preload\" as=\"style\" href=\"http://localhost:8000/build/assets/app-ltE_t2u8.css\" />\n        <link rel=\"modulepreload\" as=\"script\" href=\"http://localhost:8000/build/assets/app-CXDpL9bK.js\" />\n        <link rel=\"stylesheet\" href=\"http://localhost:8000/build/assets/app-ltE_t2u8.css\" />\n        <script type=\"module\" src=\"http://localhost:8000/build/assets/app-CXDpL9bK.js\"></script>\n    </head>\n    <body class=\"font-sans text-gray-900 antialiased\">\n        <div class=\"min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100\">\n            <div>\n                <a href=\"/\">\n                    <svg viewBox=\"0 0 316 316\" xmlns=\"http://www.w3.org/2000/svg\" class=\"w-20 h-20 fill-current text-gray-500\">\n                        <path d=\"M305.8 81.125C305.77 80.995 305.69 80.885 305.65 80.755C305.56 80.525 305.49 80.285 305.37 80.075C305.29 79.935 305.17 79.815 305.07 79.685C304.94 79.515 304.83 79.325 304.68 79.175C304.55 79.045 304.39 78.955 304.25 78.845C304.09 78.715 303.95 78.575 303.77 78.475L251.32 48.275C249.97 47.495 248.31 47.495 246.96 48.275L194.51 78.475C194.33 78.575 194.19 78.725 194.03 78.845C193.89 78.955 193.73 79.045 193.6 79.175C193.45 79.325 193.34 79.515 193.21 79.685C193.11 79.815 192.99 79.935 192.91 80.075C192.79 80.285 192.71 80.525 192.63 80.755C192.58 80.875 192.51 80.995 192.48 81.125C192.38 81.495 192.33 81.875 192.33 82.265V139.625L148.62 164.795V52.575C148.62 52.185 148.57 51.805 148.47 51.435C148.44 51.305 148.36 51.195 148.32 51.065C148.23 50.835 148.16 50.595 148.04 50.385C147.96 50.245 147.84 50.125 147.74 49.995C147.61 49.825 147.5 49.635 147.35 49.485C147.22 49.355 147.06 49.265 146.92 49.155C146.76 49.025 146.62 48.885 146.44 48.785L93.99 18.585C92.64 17.805 90.98 17.805 89.63 18.585L37.18 48.785C37 48.885 36.86 49.035 36.7 49.155C36.56 49.265 36.4 49.355 36.27 49.485C36.12 49.635 36.01 49.825 35.88 49.995C35.78 50.125 35.66 50.245 35.58 50.385C35.46 50.595 35.38 50.835 35.3 51.065C35.25 51.185 35.18 51.305 35.15 51.435C35.05 51.805 35 52.185 35 52.575V232.235C35 233.795 35.84 235.245 37.19 236.025L142.1 296.425C142.33 296.555 142.58 296.635 142.82 296.725C142.93 296.765 143.04 296.835 143.16 296.865C143.53 296.965 143.9 297.015 144.28 297.015C144.66 297.015 145.03 296.965 145.4 296.865C145.5 296.835 145.59 296.775 145.69 296.745C145.95 296.655 146.21 296.565 146.45 296.435L251.36 236.035C252.72 235.255 253.55 233.815 253.55 232.245V174.885L303.81 145.945C305.17 145.165 306 143.725 306 142.155V82.265C305.95 81.875 305.89 81.495 305.8 81.125ZM144.2 227.205L100.57 202.515L146.39 176.135L196.66 147.195L240.33 172.335L208.29 190.625L144.2 227.205ZM244.75 114.995V164.795L226.39 154.225L201.03 139.625V89.825L219.39 100.395L244.75 114.995ZM249.12 57.105L292.81 82.265L249.12 107.425L205.43 82.265L249.12 57.105ZM114.49 184.425L96.13 194.995V85.305L121.49 70.705L139.85 60.135V169.815L114.49 184.425ZM91.76 27.425L135.45 52.585L91.76 77.745L48.07 52.585L91.76 27.425ZM43.67 60.135L62.03 70.705L87.39 85.305V202.545V202.555V202.565C87.39 202.735 87.44 202.895 87.46 203.055C87.49 203.265 87.49 203.485 87.55 203.695V203.705C87.6 203.875 87.69 204.035 87.76 204.195C87.84 204.375 87.89 204.575 87.99 204.745C87.99 204.745 87.99 204.755 88 204.755C88.09 204.905 88.22 205.035 88.33 205.175C88.45 205.335 88.55 205.495 88.69 205.635L88.7 205.645C88.82 205.765 88.98 205.855 89.12 205.965C89.28 206.085 89.42 206.225 89.59 206.325C89.6 206.325 89.6 206.325 89.61 206.335C89.62 206.335 89.62 206.345 89.63 206.345L139.87 234.775V285.065L43.67 229.705V60.135ZM244.75 229.705L148.58 285.075V234.775L219.8 194.115L244.75 179.875V229.705ZM297.2 139.625L253.49 164.795V114.995L278.85 100.395L297.21 89.825V139.625H297.2Z\"/>\n                    </svg>\n                </a>\n            </div>\n            <div class=\"w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg\">\n                <!-- Session Status -->\n                <form method=\"POST\" action=\"http://localhost:8000/login\">\n                    <input type=\"hidden\" name=\"_token\" value=\"tE498gouHYcBvucd7v4H9AMpKNEw3e4D8wIacJSi\" autocomplete=\"off\">\n                    <!-- Email Address -->\n                    <div>\n                        <label class=\"block font-medium text-sm text-gray-700\" for=\"email\">\n    Email\n</label>\n                        <input  class=\"border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full\" id=\"email\" type=\"email\" name=\"email\" required=\"required\" autofocus=\"autofocus\" autocomplete=\"username\">\n                    \n                    </div>\n                    <!-- Password -->\n                    <div class=\"mt-4\">\n                        <label class=\"block font-medium text-sm text-gray-700\" for=\"password\">\n    Password\n</label>\n                        <input  class=\"border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full\" id=\"password\" type=\"password\" name=\"password\" required=\"required\" autocomplete=\"current-password\">\n\n                    \n                    </div>\n                    <!-- Remember Me -->\n                    <div class=\"block mt-4\">\n                        <label for=\"remember_me\" class=\"inline-flex items-center\">\n                            <input id=\"remember_me\" type=\"checkbox\" class=\"rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500\" name=\"remember\">\n                            <span class=\"ms-2 text-sm text-gray-600\">Remember me</span>\n                        </label>\n                    </div>\n                    <div class=\"flex items-center justify-end mt-4\">\n                        <a class=\"underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500\" href=\"http://localhost:8000/forgot-password\">\n                    Forgot your password?\n                </a>\n                        <button type=\"submit\" class=\"inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3\">\n    Log in\n</button>\n                    </div>\n                </form>\n            </div>\n        </div>\n    </body>\n</html>"
+						}
+					]
+				},
+				{
+					"name": "User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "ly_dara@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "P@ssword123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/auth/user",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "ly_dara@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/user",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:58:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 23,\n            \"first_name\": \"dara\",\n            \"last_name\": \"ly\",\n            \"username\": \"ly_dara\",\n            \"email\": \"ly_dara@gmail.com\",\n            \"phone_number\": \"010112233\",\n            \"birth_of_date\": \"2000-12-25\",\n            \"role\": \"user\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "ly_dara@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "P@ssword123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/auth/user",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"auth",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 03:59:47 GMT"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "XSRF-TOKEN=eyJpdiI6IktBaUlhV25BY1hwSitpNnNKOHg5Mmc9PSIsInZhbHVlIjoiNk9BNlV5VWdxd3BOaTA5VGxTNTl0MWsxbU1HK2FmWlpaZXJYWkxqN2VPSm1LcW90cGpZdjVya2ZVc2RDVlBZdXpLV2tGcStjNHlWK1ROVzZ1Yi94MlhBeEF3TjBsK2pDZW90c1dEaUU5S21SNlJGZkw1Yk1HL21iM0t5eUN5UUwiLCJtYWMiOiIyYTYyNjA4ZTMzODM4MWE5ZGQxNjkxNzE1ODE3NmRmMjE5ZjllZDQ4MGM1YjNhNjE2NzJjN2JhOThmYjg2M2ZlIiwidGFnIjoiIn0%3D; expires=Fri, 10 Oct 2025 05:59:47 GMT; Max-Age=7200; path=/; samesite=lax"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=eyJpdiI6IjJ4OEdTSzNhMk1Na1o0Q2E1bldBUnc9PSIsInZhbHVlIjoiblNxanNpaHRhL0xadUdSN1RMVURoZ3c1ZjM0bGo3UWdSTHhiSEdjYytrbU5jbVFQVGs3MzlyYnVRTkFTWWZ3VHZMSVFTdXpJdVNFU0krMC9VWVpvcWI5Z2ZxcHJ1QTE1TG1INHBnc2MrWThGMEtNUG95WlkwaTRYTEZDMFZJNWoiLCJtYWMiOiIxNGQ3OWNhZTY1ZTA0ZGVkZDVkMDgxMTUzZWY3M2YzMDI4NTVmYTgzYTczNTUxMWQxZTk0MWNmOTQ3MWZhNjBhIiwidGFnIjoiIn0%3D; expires=Fri, 10 Oct 2025 05:59:47 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n        <meta name=\"csrf-token\" content=\"tE498gouHYcBvucd7v4H9AMpKNEw3e4D8wIacJSi\">\n        <title>Laravel</title>\n        <!-- Fonts -->\n        <link rel=\"preconnect\" href=\"https://fonts.bunny.net\">\n        <link href=\"https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap\" rel=\"stylesheet\" />\n        <!-- Scripts -->\n        <link rel=\"preload\" as=\"style\" href=\"http://localhost:8000/build/assets/app-ltE_t2u8.css\" />\n        <link rel=\"modulepreload\" as=\"script\" href=\"http://localhost:8000/build/assets/app-CXDpL9bK.js\" />\n        <link rel=\"stylesheet\" href=\"http://localhost:8000/build/assets/app-ltE_t2u8.css\" />\n        <script type=\"module\" src=\"http://localhost:8000/build/assets/app-CXDpL9bK.js\"></script>\n    </head>\n    <body class=\"font-sans text-gray-900 antialiased\">\n        <div class=\"min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100\">\n            <div>\n                <a href=\"/\">\n                    <svg viewBox=\"0 0 316 316\" xmlns=\"http://www.w3.org/2000/svg\" class=\"w-20 h-20 fill-current text-gray-500\">\n                        <path d=\"M305.8 81.125C305.77 80.995 305.69 80.885 305.65 80.755C305.56 80.525 305.49 80.285 305.37 80.075C305.29 79.935 305.17 79.815 305.07 79.685C304.94 79.515 304.83 79.325 304.68 79.175C304.55 79.045 304.39 78.955 304.25 78.845C304.09 78.715 303.95 78.575 303.77 78.475L251.32 48.275C249.97 47.495 248.31 47.495 246.96 48.275L194.51 78.475C194.33 78.575 194.19 78.725 194.03 78.845C193.89 78.955 193.73 79.045 193.6 79.175C193.45 79.325 193.34 79.515 193.21 79.685C193.11 79.815 192.99 79.935 192.91 80.075C192.79 80.285 192.71 80.525 192.63 80.755C192.58 80.875 192.51 80.995 192.48 81.125C192.38 81.495 192.33 81.875 192.33 82.265V139.625L148.62 164.795V52.575C148.62 52.185 148.57 51.805 148.47 51.435C148.44 51.305 148.36 51.195 148.32 51.065C148.23 50.835 148.16 50.595 148.04 50.385C147.96 50.245 147.84 50.125 147.74 49.995C147.61 49.825 147.5 49.635 147.35 49.485C147.22 49.355 147.06 49.265 146.92 49.155C146.76 49.025 146.62 48.885 146.44 48.785L93.99 18.585C92.64 17.805 90.98 17.805 89.63 18.585L37.18 48.785C37 48.885 36.86 49.035 36.7 49.155C36.56 49.265 36.4 49.355 36.27 49.485C36.12 49.635 36.01 49.825 35.88 49.995C35.78 50.125 35.66 50.245 35.58 50.385C35.46 50.595 35.38 50.835 35.3 51.065C35.25 51.185 35.18 51.305 35.15 51.435C35.05 51.805 35 52.185 35 52.575V232.235C35 233.795 35.84 235.245 37.19 236.025L142.1 296.425C142.33 296.555 142.58 296.635 142.82 296.725C142.93 296.765 143.04 296.835 143.16 296.865C143.53 296.965 143.9 297.015 144.28 297.015C144.66 297.015 145.03 296.965 145.4 296.865C145.5 296.835 145.59 296.775 145.69 296.745C145.95 296.655 146.21 296.565 146.45 296.435L251.36 236.035C252.72 235.255 253.55 233.815 253.55 232.245V174.885L303.81 145.945C305.17 145.165 306 143.725 306 142.155V82.265C305.95 81.875 305.89 81.495 305.8 81.125ZM144.2 227.205L100.57 202.515L146.39 176.135L196.66 147.195L240.33 172.335L208.29 190.625L144.2 227.205ZM244.75 114.995V164.795L226.39 154.225L201.03 139.625V89.825L219.39 100.395L244.75 114.995ZM249.12 57.105L292.81 82.265L249.12 107.425L205.43 82.265L249.12 57.105ZM114.49 184.425L96.13 194.995V85.305L121.49 70.705L139.85 60.135V169.815L114.49 184.425ZM91.76 27.425L135.45 52.585L91.76 77.745L48.07 52.585L91.76 27.425ZM43.67 60.135L62.03 70.705L87.39 85.305V202.545V202.555V202.565C87.39 202.735 87.44 202.895 87.46 203.055C87.49 203.265 87.49 203.485 87.55 203.695V203.705C87.6 203.875 87.69 204.035 87.76 204.195C87.84 204.375 87.89 204.575 87.99 204.745C87.99 204.745 87.99 204.755 88 204.755C88.09 204.905 88.22 205.035 88.33 205.175C88.45 205.335 88.55 205.495 88.69 205.635L88.7 205.645C88.82 205.765 88.98 205.855 89.12 205.965C89.28 206.085 89.42 206.225 89.59 206.325C89.6 206.325 89.6 206.325 89.61 206.335C89.62 206.335 89.62 206.345 89.63 206.345L139.87 234.775V285.065L43.67 229.705V60.135ZM244.75 229.705L148.58 285.075V234.775L219.8 194.115L244.75 179.875V229.705ZM297.2 139.625L253.49 164.795V114.995L278.85 100.395L297.21 89.825V139.625H297.2Z\"/>\n                    </svg>\n                </a>\n            </div>\n            <div class=\"w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg\">\n                <!-- Session Status -->\n                <form method=\"POST\" action=\"http://localhost:8000/login\">\n                    <input type=\"hidden\" name=\"_token\" value=\"tE498gouHYcBvucd7v4H9AMpKNEw3e4D8wIacJSi\" autocomplete=\"off\">\n                    <!-- Email Address -->\n                    <div>\n                        <label class=\"block font-medium text-sm text-gray-700\" for=\"email\">\n    Email\n</label>\n                        <input  class=\"border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full\" id=\"email\" type=\"email\" name=\"email\" required=\"required\" autofocus=\"autofocus\" autocomplete=\"username\">\n                    \n                    </div>\n                    <!-- Password -->\n                    <div class=\"mt-4\">\n                        <label class=\"block font-medium text-sm text-gray-700\" for=\"password\">\n    Password\n</label>\n                        <input  class=\"border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full\" id=\"password\" type=\"password\" name=\"password\" required=\"required\" autocomplete=\"current-password\">\n\n                    \n                    </div>\n                    <!-- Remember Me -->\n                    <div class=\"block mt-4\">\n                        <label for=\"remember_me\" class=\"inline-flex items-center\">\n                            <input id=\"remember_me\" type=\"checkbox\" class=\"rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500\" name=\"remember\">\n                            <span class=\"ms-2 text-sm text-gray-600\">Remember me</span>\n                        </label>\n                    </div>\n                    <div class=\"flex items-center justify-end mt-4\">\n                        <a class=\"underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500\" href=\"http://localhost:8000/forgot-password\">\n                    Forgot your password?\n                </a>\n                        <button type=\"submit\" class=\"inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3\">\n    Log in\n</button>\n                    </div>\n                </form>\n            </div>\n        </div>\n    </body>\n</html>"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "List Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/products",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 04:02:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"iPhone 15 Pro\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Electronics\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"MacBook Pro M3\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Revolutionary MacBook Pro with M3 chip delivers exceptional performance for professionals and creatives.\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Electronics\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Wireless Headphones Pro\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Premium wireless headphones with active noise cancellation and superior sound quality.\",\n            \"category\": {\n                \"id\": 1,\n                \"name\": \"Electronics\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Vintage Leather Jacket\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Classic vintage brown leather jacket with premium craftsmanship. Perfect for casual and semi-formal occasions.\",\n            \"category\": {\n                \"id\": 2,\n                \"name\": \"Clothing\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Smart Coffee Maker\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"WiFi-enabled coffee maker with app control, programmable brewing, and built-in grinder for the perfect cup every time.\",\n            \"category\": {\n                \"id\": 3,\n                \"name\": \"Home & Garden\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Professional Basketball\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Official size and weight basketball made with premium composite leather for indoor and outdoor play.\",\n            \"category\": {\n                \"id\": 4,\n                \"name\": \"Sports & Outdoors\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Programming Fundamentals\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Comprehensive guide to programming fundamentals covering algorithms, data structures, and best practices.\",\n            \"category\": {\n                \"id\": 5,\n                \"name\": \"Books & Media\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Yoga Mat Premium\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Non-slip premium yoga mat with excellent cushioning and durability. Perfect for all types of yoga practice.\",\n            \"category\": {\n                \"id\": 4,\n                \"name\": \"Sports & Outdoors\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 9,\n            \"name\": \"Ergonomic Office Chair\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Comfortable ergonomic office chair with lumbar support, adjustable height, and breathable mesh back.\",\n            \"category\": {\n                \"id\": 3,\n                \"name\": \"Home & Garden\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        },\n        {\n            \"id\": 10,\n            \"name\": \"Cashmere Scarf\",\n            \"slug\": null,\n            \"sku\": null,\n            \"price\": null,\n            \"stock\": null,\n            \"description\": \"Luxurious 100% cashmere scarf in elegant colors. Soft, warm, and perfect for any season.\",\n            \"category\": {\n                \"id\": 2,\n                \"name\": \"Clothing\",\n                \"slug\": null\n            },\n            \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n            \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n        }\n    ],\n    \"links\": {\n        \"first\": \"http://localhost:8000/api/products?page=1\",\n        \"last\": \"http://localhost:8000/api/products?page=2\",\n        \"prev\": null,\n        \"next\": \"http://localhost:8000/api/products?page=2\"\n    },\n    \"meta\": {\n        \"current_page\": 1,\n        \"from\": 1,\n        \"last_page\": 2,\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"page\": null,\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/products?page=1\",\n                \"label\": \"1\",\n                \"page\": 1,\n                \"active\": true\n            },\n            {\n                \"url\": \"http://localhost:8000/api/products?page=2\",\n                \"label\": \"2\",\n                \"page\": 2,\n                \"active\": false\n            },\n            {\n                \"url\": \"http://localhost:8000/api/products?page=2\",\n                \"label\": \"Next &raquo;\",\n                \"page\": 2,\n                \"active\": false\n            }\n        ],\n        \"path\": \"http://localhost:8000/api/products\",\n        \"per_page\": 10,\n        \"to\": 10,\n        \"total\": 17\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Product Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/products/1000",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"products",
+								"1000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 06:37:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"iPhone 15 Pro\",\n        \"slug\": null,\n        \"sku\": null,\n        \"price\": null,\n        \"stock\": null,\n        \"description\": \"Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.\",\n        \"category\": {\n            \"id\": 1,\n            \"name\": \"Electronics\",\n            \"slug\": null\n        },\n        \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n        \"updated_at\": \"2025-10-10T03:45:08.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products/1000",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products",
+										"1000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 06:37:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Save Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "iPhone 17 Pro Max",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "Premium smartphone with cutting-edge technology",
+									"type": "text"
+								},
+								{
+									"key": "cover",
+									"value": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=400&fit=crop&q=80",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/products",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "iPhone 17 Pro Max",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.",
+											"type": "text"
+										},
+										{
+											"key": "summary",
+											"value": "Premium smartphone with cutting-edge technology",
+											"type": "text"
+										},
+										{
+											"key": "cover",
+											"value": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=400&fit=crop&q=80",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 07:45:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 18,\n        \"name\": \"iPhone 17 Pro Max\",\n        \"slug\": null,\n        \"sku\": null,\n        \"price\": null,\n        \"stock\": null,\n        \"description\": \"Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.\",\n        \"category\": {\n            \"id\": 1,\n            \"name\": \"Electronics\",\n            \"slug\": null\n        },\n        \"created_at\": \"2025-10-10T07:45:51.000000Z\",\n        \"updated_at\": \"2025-10-10T07:45:51.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "iPhone 17 Pro Max",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.",
+											"type": "text"
+										},
+										{
+											"key": "summary",
+											"value": "Premium smartphone with cutting-edge technology",
+											"type": "text"
+										},
+										{
+											"key": "cover",
+											"value": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=400&fit=crop&q=80",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 07:46:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Validation error\",\n    \"errors\": {\n        \"category_id\": [\n            \"The category id field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "iPhone 15 Pro Max",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "Premium smartphone with cutting-edge technology",
+									"type": "text"
+								},
+								{
+									"key": "cover",
+									"value": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=400&fit=crop&q=80",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/products/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "iPhone 15 Pro Max",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.",
+											"type": "text"
+										},
+										{
+											"key": "summary",
+											"value": "Premium smartphone with cutting-edge technology",
+											"type": "text"
+										},
+										{
+											"key": "cover",
+											"value": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=400&fit=crop&q=80",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 07:29:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"iPhone 15 Pro Max\",\n        \"slug\": null,\n        \"sku\": null,\n        \"price\": null,\n        \"stock\": null,\n        \"description\": \"Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.\",\n        \"category\": {\n            \"id\": 1,\n            \"name\": \"Electronics\",\n            \"slug\": null\n        },\n        \"created_at\": \"2025-10-10T03:45:08.000000Z\",\n        \"updated_at\": \"2025-10-10T07:29:32.000000Z\"\n    }\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "iPhone 15 Pro Max",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Latest iPhone model with titanium design and advanced camera system. Features the powerful A17 Pro chip for incredible performance.",
+											"type": "text"
+										},
+										{
+											"key": "summary",
+											"value": "Premium smartphone with cutting-edge technology",
+											"type": "text"
+										},
+										{
+											"key": "cover",
+											"value": "https://images.unsplash.com/photo-1678652197831-2d180705cd2c?w=400&h=400&fit=crop&q=80",
+											"type": "text"
+										},
+										{
+											"key": "category_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products/1000",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products",
+										"1000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 07:29:49 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/products/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 07:37:32 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/products/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 07:38:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "List Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/cart",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:12:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:12:52 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"items\": [\n        {\n            \"id\": 1,\n            \"name\": \"iPhone 15 Pro\",\n            \"price\": 20.48,\n            \"quantity\": \"2\",\n            \"subtotal\": 40.96,\n            \"available_stock\": 61\n        }\n    ],\n    \"total\": 40.96\n}"
+						}
+					]
+				},
+				{
+					"name": "Count Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/cart/count",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"cart",
+								"count"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/count",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"count"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:18:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:18:14 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Add to Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "quantity",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/cart/add/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"cart",
+								"add",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "quantity",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/add/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"add",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:10:51 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:10:51 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product added to cart successfully\",\n    \"product\": {\n        \"id\": 1,\n        \"name\": \"iPhone 15 Pro\",\n        \"quantity_in_cart\": \"1\",\n        \"price\": 20.48\n    },\n    \"cart_item_count\": 1\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "quantity",
+											"value": "2000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/add/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"add",
+										"1"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:11:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:11:14 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Not enough stock available. Available: 61, Requested: 2001\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "quantity",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/cart/update/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"cart",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "quantity",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/update/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"update",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:19:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:19:37 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cart updated successfully\",\n    \"product\": {\n        \"id\": 1,\n        \"name\": \"iPhone 15 Pro\",\n        \"quantity_in_cart\": \"10\",\n        \"price\": 20.48\n    },\n    \"cart_item_count\": 10\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "quantity",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/update/100",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"update",
+										"100"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:20:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:20:06 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found in cart\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove from Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}:{{port}}/api/cart/remove/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"cart",
+								"remove",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "quantity",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/remove/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"remove",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:16:29 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:16:29 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Removed 1 item(s) from cart. 2 remaining\",\n    \"cart_item_count\": 2,\n    \"remaining_quantity\": 2\n}"
+						},
+						{
+							"name": "Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "quantity",
+											"value": "100\n",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/remove/1",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"remove",
+										"1"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:16:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:16:57 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Product not found in cart\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Clear Cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/api/cart/clear",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"cart",
+								"clear"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{host}}:{{port}}/api/cart/clear",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"cart",
+										"clear"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.29"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 10 Oct 2025 08:20:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "laravel-session=5Hjf4njQIxbvtOfOMep4octV4vilvvE8hp3T3wTB; expires=Fri, 10 Oct 2025 10:20:46 GMT; Max-Age=7200; path=/; httponly; samesite=lax"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cart cleared successfully\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": ""
+		},
+		{
+			"key": "port",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		}
+	]
+}
