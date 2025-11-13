@@ -4,60 +4,148 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Category;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
         'description',
-        'price',
-        'stock',
-        'category_id'
+        'summary',
+        'cover',
+        'category_id',
     ];
 
-    protected $casts = [
-        'price' => 'decimal:2',
-        'stock' => 'integer'
-    ];
+    protected function casts(): array
+    {
+        return [
+            'deleted_at' => 'datetime',
+        ];
+    }
 
-    /**
-     * Get the category that owns the product.
-     */
-    public function category(): BelongsTo
+    // Relationships
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Get the order items for the product.
-     */
-    public function orderItems(): HasMany
+    public function subCategory()
+    {
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function productSkus()
+    {
+        return $this->hasMany(ProductSku::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
     }
 
-    /**
-     * Check if the product has enough stock for a given quantity.
-     */
-    public function hasStock(int $quantity): bool
+    // CRUD Operations
+    public static function createProduct(array $data)
     {
-        return $this->stock >= $quantity;
+        return self::create($data);
     }
 
-    /**
-     * Decrement stock with validation.
-     */
-    public function decrementStock(int $quantity): bool
+    public static function getProductById($id)
     {
-        if (!$this->hasStock($quantity)) {
-            return false;
+        return self::find($id);
+    }
+
+    public static function getAllProducts()
+    {
+        return self::all();
+    }
+
+    public static function getProductsWithCategory()
+    {
+        return self::with(['category', 'subCategory'])->get();
+    }
+
+    public static function getProductsWithSkus()
+    {
+        return self::with('productSkus')->get();
+    }
+
+    public static function getProductsByCategory($categoryId)
+    {
+        return self::where('category_id', $categoryId)->get();
+    }
+
+    public static function getProductsBySubCategory($subCategoryId)
+    {
+        return self::where('sub_category_id', $subCategoryId)->get();
+    }
+
+    public function updateProduct(array $data)
+    {
+        return $this->update($data);
+    }
+
+    public function deleteProduct()
+    {
+        return $this->delete();
+    }
+
+    public static function searchProducts($query)
+    {
+        return self::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->get();
+    }
+
+    // Price Helper Methods
+    public function getPrice()
+    {
+        $sku = $this->productSkus()->first();
+
+        return $sku ? $sku->price : null;
+    }
+
+    public function getPriceRange()
+    {
+        $skus = $this->productSkus;
+        if ($skus->isEmpty()) {
+            return null;
         }
 
-        return $this->decrement('stock', $quantity);
+        $prices = $skus->pluck('price');
+        $minPrice = $prices->min();
+        $maxPrice = $prices->max();
+
+        if ($minPrice == $maxPrice) {
+            return number_format($minPrice, 2);
+        }
+
+        return number_format($minPrice, 2).' - '.number_format($maxPrice, 2);
+    }
+
+    public function getFormattedPrice()
+    {
+        $price = $this->getPrice();
+
+        return $price ? '$'.number_format($price, 2) : 'Price not available';
+    }
+
+    public function getFormattedPriceRange()
+    {
+        $priceRange = $this->getPriceRange();
+
+        return $priceRange ? '$'.$priceRange : 'Price not available';
     }
 }

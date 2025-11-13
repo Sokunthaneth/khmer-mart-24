@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\Product;
+use App\Models\OrderDetail;
+use App\Models\OrderItem;
+use App\Models\ProductSku;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -25,8 +25,8 @@ class CheckoutController extends Controller
 
         try {
             $order = DB::transaction(function () use ($cart) {
-                // 1. Create the order
-                $order = Order::create([
+                // 1. Create the order detail
+                $order = OrderDetail::create([
                     'user_id' => auth()->id(),
                     'total' => 0,
                     'status' => 'pending'
@@ -34,26 +34,30 @@ class CheckoutController extends Controller
 
                 $total = 0;
 
-                // 2. Process each item
-                foreach ($cart as $productId => $quantity) {
-                    // Lock the product for update to prevent race conditions
-                    $product = Product::lockForUpdate()->findOrFail($productId);
+                // 2. Process each cart item (expected format: ['sku_id' => qty])
+                foreach ($cart as $skuId => $qty) {
+                    // Lock the ProductSku for update to prevent race conditions
+                    $sku = ProductSku::lockForUpdate()->findOrFail($skuId);
 
-                    // Verify stock
-                    if ($product->stock < $quantity) {
-                        throw new \Exception("Insufficient stock for product: {$product->name}");
+                    // Verify stock availability
+                    if ($sku->stock < $qty) {
+                        throw new \Exception("Insufficient stock for SKU: {$sku->sku}");
                     }
 
+                    // Calculate line total
+                    $lineTotal = $qty * $sku->price;
+
                     // Create order item
-                    $lineTotal = $quantity * $product->price;
-                    $order->items()->create([
-                        'product_id' => $product->id,
-                        'quantity' => $quantity,
-                        'unit_price' => $product->price
+                    OrderItem::create([
+                        'order_detail_id' => $order->id,
+                        'product_id' => $sku->product_id,
+                        'product_sku_id' => $sku->id,
+                        'qty' => $qty,
+                        'unit_price' => $sku->price,
                     ]);
 
-                    // Update stock
-                    $product->decrement('stock', $quantity);
+                    // Decrement SKU stock
+                    $sku->decrement('stock', $qty);
 
                     $total += $lineTotal;
                 }
@@ -73,7 +77,7 @@ class CheckoutController extends Controller
                 return $order;
             });
 
-            return redirect()->route('orders.show', $order)
+            return redirect()->route('order.success', $order->id)
                 ->with('success', 'Order placed successfully!');
 
         } catch (\Exception $e) {
@@ -84,10 +88,24 @@ class CheckoutController extends Controller
     }
 
     /**
+     * Show order success page
+     */
+    public function success($orderId)
+    {
+        $order = OrderDetail::with(['items.productSku.product', 'items.product'])
+            ->where('id', $orderId)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+
+        return view('orders.success', compact('order'));
+    }
+
+    /**
      * Clear product-related cache.
      */
     private function clearProductCache(): void
     {
-        Cache::tags(['products', 'categories'])->flush();
+        Cache::forget('categories_with_counts');
+        // Clear other product-related caches if needed
     }
 }

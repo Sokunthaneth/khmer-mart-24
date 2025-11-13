@@ -3,8 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Product;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -18,16 +19,12 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->words(3, true);
-
         return [
-            'category_id' => Category::factory(),
-            'name' => $name,
-            'slug' => Str::slug($name),
-            'sku' => strtoupper($this->faker->bothify('??##??##')),
-            'description' => $this->faker->paragraph(),
-            'price' => $this->faker->randomFloat(2, 10, 1000),
-            'stock' => $this->faker->numberBetween(0, 100),
+            'name' => fake()->words(3, true),
+            'description' => fake()->paragraph(),
+            'summary' => fake()->sentence(),
+            'cover' => fake()->imageUrl(400, 400, 'products'),
+            'category_id' => fake()->randomElement(['1', '2', '3', '4', '5']),
         ];
     }
 }

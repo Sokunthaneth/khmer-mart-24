@@ -14,13 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->unsignedInteger('stock')->default(0);
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->text('summary')->nullable();
+            $table->string('cover')->nullable();
+            $table->string('category_id');
             $table->timestamps();
-
-            $table->index('category_id');
-            $table->index('name');
+            $table->softDeletes('deleted_at');
         });
     }
 
